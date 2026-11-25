@@ -404,6 +404,25 @@ table { border-collapse: collapse; width: 100%; }
 }
 @media print { .more-tools { display: none !important; } }
 
+/* Currency picker (searchable combobox) */
+.cur-field { margin-bottom: 18px; }
+.combo { position: relative; }
+.combo-input { padding-inline-end: 40px; cursor: pointer; text-overflow: ellipsis; }
+.cur-field.open .combo-input { cursor: text; }
+.combo-chevron { position: absolute; inset-inline-end: 12px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--gray-500); pointer-events: none; transition: transform .2s; }
+.cur-field.open .combo-chevron { transform: translateY(-50%) rotate(180deg); }
+.combo-list {
+  position: absolute; z-index: 30; inset-inline: 0; top: calc(100% + 6px); max-height: 290px; overflow-y: auto;
+  margin: 0; padding: 6px; list-style: none; background: #fff; border: 1px solid var(--gray-200);
+  border-radius: var(--radius); box-shadow: var(--shadow-lg);
+}
+.combo-opt { margin: 0; padding: 9px 12px; border-radius: 8px; cursor: pointer; font-size: .95rem; color: var(--gray-700); line-height: 1.4; }
+.combo-opt.active { background: var(--blue-50); color: var(--navy-900); }
+.combo-opt.selected { font-weight: 700; color: var(--navy-900); }
+.combo-opt.selected::after { content: "\2713"; float: inline-end; color: var(--green-700); }
+.combo-empty { margin: 0; padding: 12px; color: var(--gray-500); font-size: .92rem; }
+@media print { .cur-field .hint, .combo-list, .combo-chevron { display: none !important; } }
+
 /* Salary Breakdown */
 .bd-head, .bd-row { display: grid; grid-template-columns: 14px minmax(0, 1.3fr) minmax(0, 1fr) 70px 40px; gap: 10px; align-items: center; }
 .bd-head { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-500); font-weight: 700; padding: 0 0 6px; border-bottom: 2px solid var(--gray-200); }

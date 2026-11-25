@@ -7,9 +7,10 @@
   <div class="calc-layout" id="budget">
     <section class="card calc-panel" aria-labelledby="bd-title">
       <h2 id="bd-title">Votre budget mensuel</h2>
+      <div data-currency-picker></div>
       <div class="field">
         <label for="bd-income">Salaire / revenu mensuel</label>
-        <div class="input-prefix"><span>$</span><input id="bd-income" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="4 000,00" aria-describedby="bd-income-err bd-income-hint"></div>
+        <div class="input-prefix"><span class="cur-sym">$</span><input id="bd-income" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="4 000,00" aria-describedby="bd-income-err bd-income-hint"></div>
         <span class="hint" id="bd-income-hint">Utilisez votre salaire net, ou votre salaire brut en ajoutant un montant dans la catégorie Impôts ci-dessous.</span>
         <span class="field-error" id="bd-income-err"></span>
       </div>

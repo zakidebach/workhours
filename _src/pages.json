@@ -6,12 +6,30 @@
     "description": "Free work time calculator, hourly pay calculator and monthly budget tool for U.S. workers. Calculate hours worked, gross pay and where your salary goes. No sign-up.",
     "priority": "1.0",
     "faq": [
-      ["Is WorkHours free?", "Yes. All three tools are completely free, with no account, no sign-up and no limits."],
-      ["Do you save or see my information?", "No. Every calculation runs inside your web browser, and nothing you type is sent to our servers. To keep you from losing your work, your latest entries are saved only in your own browser on this device. You can erase them at any time with the Clear or Reset button."],
-      ["How do I calculate hours worked?", "Subtract your start time from your end time, then subtract your unpaid break. For example, 8:00 AM to 5:00 PM is 9 hours; minus a 1-hour lunch, you worked 8 hours. The <a href=\"{{root}}work-hours-calculator/\">Work Hours Calculator</a> does this for you, including shifts that end after midnight."],
-      ["Does the Pay Calculator subtract taxes?", "No. It shows gross pay, which is your pay before taxes and deductions, because taxes depend on your personal situation. You can add your taxes as a category in the <a href=\"{{root}}salary-breakdown/\">Salary Breakdown</a> tool."],
-      ["Is overtime always paid at 1.5 times my rate?", "Not always. Under federal law, non-exempt employees generally earn at least 1.5 times their regular rate for hours over 40 in a workweek, but some employees are exempt and state rules vary. That's why the 1.5× option in the Pay Calculator is optional and labeled as an estimate."],
-      ["Can I use WorkHours on my phone?", "Yes. Every page is designed to work on phones, tablets and computers in any modern browser."]
+      [
+        "Is WorkHours free?",
+        "Yes. All three tools are completely free, with no account, no sign-up and no limits."
+      ],
+      [
+        "Do you save or see my information?",
+        "No. Every calculation runs inside your web browser, and nothing you type is sent to our servers. To keep you from losing your work, your latest entries are saved only in your own browser on this device. You can erase them at any time with the Clear or Reset button."
+      ],
+      [
+        "How do I calculate hours worked?",
+        "Subtract your start time from your end time, then subtract your unpaid break. For example, 8:00 AM to 5:00 PM is 9 hours; minus a 1-hour lunch, you worked 8 hours. The <a href=\"{{root}}work-hours-calculator/\">Work Hours Calculator</a> does this for you, including shifts that end after midnight."
+      ],
+      [
+        "Does the Pay Calculator subtract taxes?",
+        "No. It shows gross pay, which is your pay before taxes and deductions, because taxes depend on your personal situation. You can add your taxes as a category in the <a href=\"{{root}}salary-breakdown/\">Salary Breakdown</a> tool."
+      ],
+      [
+        "Is overtime always paid at 1.5 times my rate?",
+        "Not always. Under federal law, non-exempt employees generally earn at least 1.5 times their regular rate for hours over 40 in a workweek, but some employees are exempt and state rules vary. That's why the 1.5× option in the Pay Calculator is optional and labeled as an estimate."
+      ],
+      [
+        "Can I use WorkHours on my phone?",
+        "Yes. Every page is designed to work on phones, tablets and computers in any modern browser."
+      ]
     ]
   },
   {
@@ -23,13 +41,32 @@
     "title": "Free Work Hours Calculator – Calculate Hours Worked | WorkHours",
     "description": "Free work hours calculator: enter start time, end time and break to calculate hours worked in hours, minutes and decimal hours. Supports overnight shifts.",
     "priority": "0.9",
-    "scripts": ["workhours.js"],
-    "crumbs": [["Work Hours Calculator", "work-hours-calculator/"]],
+    "scripts": [
+      "workhours.js"
+    ],
+    "crumbs": [
+      [
+        "Work Hours Calculator",
+        "work-hours-calculator/"
+      ]
+    ],
     "faq": [
-      ["How do I calculate hours worked for an overnight shift?", "Just enter the real start and end times, such as 10:00 PM and 6:30 AM. Because the end time is earlier than the start time, the calculator knows the shift ended the next day and returns 8 hours 30 minutes."],
-      ["How do I enter a 1-hour break?", "Type 1 and choose hours from the menu next to the break field, or type 60 and keep minutes selected. Both give the same result."],
-      ["What's the difference between total time and net hours?", "Total time is everything from your start time to your end time. Net hours worked is total time minus your unpaid break, which is the time you are normally paid for."],
-      ["How do I convert minutes to decimal hours?", "Divide the minutes by 60. For example, 45 minutes is 0.75 hours, so 7 hours 45 minutes is 7.75 decimal hours. The calculator shows both formats."]
+      [
+        "How do I calculate hours worked for an overnight shift?",
+        "Just enter the real start and end times, such as 10:00 PM and 6:30 AM. Because the end time is earlier than the start time, the calculator knows the shift ended the next day and returns 8 hours 30 minutes."
+      ],
+      [
+        "How do I enter a 1-hour break?",
+        "Type 1 and choose hours from the menu next to the break field, or type 60 and keep minutes selected. Both give the same result."
+      ],
+      [
+        "What's the difference between total time and net hours?",
+        "Total time is everything from your start time to your end time. Net hours worked is total time minus your unpaid break, which is the time you are normally paid for."
+      ],
+      [
+        "How do I convert minutes to decimal hours?",
+        "Divide the minutes by 60. For example, 45 minutes is 0.75 hours, so 7 hours 45 minutes is 7.75 decimal hours. The calculator shows both formats."
+      ]
     ]
   },
   {
@@ -41,13 +78,37 @@
     "title": "Hourly Pay Calculator – Daily, Weekly, Monthly & Annual Pay | WorkHours",
     "description": "Free hourly pay calculator. Enter your hourly rate and hours to see gross daily, weekly, biweekly, monthly and annual pay, with optional overtime at 1.5x.",
     "priority": "0.9",
-    "scripts": ["pay.js"],
-    "crumbs": [["Pay Calculator", "pay-calculator/"]],
+    "scripts": [
+      "currencies.js",
+      "pay.js"
+    ],
+    "crumbs": [
+      [
+        "Pay Calculator",
+        "pay-calculator/"
+      ]
+    ],
     "faq": [
-      ["How do I convert an hourly wage to a yearly salary?", "Multiply your hourly rate by the hours you work each week, then by 52. For example, $22 × 40 × 52 = $45,760 a year before taxes."],
-      ["What's the difference between biweekly and semi-monthly?", "Biweekly means every two weeks, which is 26 paychecks a year. Semi-monthly means twice a month, which is 24 paychecks a year. This calculator uses biweekly."],
-      ["Why is my paycheck smaller than the gross pay shown?", "Gross pay is before deductions. Your employer withholds federal income tax, Social Security and Medicare, and possibly state and local taxes, insurance and retirement contributions, so your take-home pay is lower."],
-      ["Should I check the 1.5× overtime box?", "Check it only if your overtime hours are paid at time and a half. Many hourly, non-exempt employees receive 1.5× for hours over 40 in a workweek, but exempt employees usually don't receive overtime, and some employers pay differently. If you're unsure, ask your employer or check your pay stub."]
+      [
+        "How do I convert an hourly wage to a yearly salary?",
+        "Multiply your hourly rate by the hours you work each week, then by 52. For example, $22 × 40 × 52 = $45,760 a year before taxes."
+      ],
+      [
+        "What's the difference between biweekly and semi-monthly?",
+        "Biweekly means every two weeks, which is 26 paychecks a year. Semi-monthly means twice a month, which is 24 paychecks a year. This calculator uses biweekly."
+      ],
+      [
+        "Why is my paycheck smaller than the gross pay shown?",
+        "Gross pay is before deductions. Your employer withholds federal income tax, Social Security and Medicare, and possibly state and local taxes, insurance and retirement contributions, so your take-home pay is lower."
+      ],
+      [
+        "Should I check the 1.5× overtime box?",
+        "Check it only if your overtime hours are paid at time and a half. Many hourly, non-exempt employees receive 1.5× for hours over 40 in a workweek, but exempt employees usually don't receive overtime, and some employers pay differently. If you're unsure, ask your employer or check your pay stub."
+      ],
+      [
+        "Can I use my own currency?",
+        "Yes. Choose any official currency from the Currency list at the top of the calculator. You can search by name, code or symbol, for example \"euro\", \"DZD\" or \"£\". The currency only changes how amounts are displayed; no exchange-rate conversion is applied. Your choice is remembered on this device. Note that the overtime rules described here are U.S. federal rules."
+      ]
     ]
   },
   {
@@ -59,14 +120,41 @@
     "title": "Salary Breakdown Calculator – Free Monthly Budget Tool | WorkHours",
     "description": "Split your monthly salary across rent, food, bills, savings and more. See total expenses, money left over, your savings rate and a budget chart. Free and private.",
     "priority": "0.9",
-    "scripts": ["budget.js"],
-    "crumbs": [["Salary Breakdown", "salary-breakdown/"]],
+    "scripts": [
+      "currencies.js",
+      "budget.js"
+    ],
+    "crumbs": [
+      [
+        "Salary Breakdown",
+        "salary-breakdown/"
+      ]
+    ],
     "faq": [
-      ["Should I enter my gross or take-home salary?", "Either works. Take-home pay (what reaches your bank account) is simplest. If you enter your gross salary, add your income taxes and other paycheck deductions in the Taxes category so the totals are accurate."],
-      ["Can I add my own categories?", "Yes. Click \"Add category\", type a name such as Childcare or Debt Payments, and enter the amount. You can also rename or delete any category, including the defaults. A budget can have up to 20 categories."],
-      ["How is the savings rate calculated?", "Savings rate is the amount in the Savings category divided by your monthly income. For example, $400 saved from $4,000 of income is a 10% savings rate. Money left over that isn't assigned is shown separately as Unassigned."],
-      ["What happens if my expenses are more than my income?", "You'll see a red Over budget warning showing how much you're short each month, and the chart switches to show how your total spending is split so you can spot the biggest categories to reduce."],
-      ["Is my budget saved?", "Your budget is saved automatically in your own browser on this device, so it's still there if you refresh the page. It is never uploaded. Press Reset to delete it."]
+      [
+        "Should I enter my gross or take-home salary?",
+        "Either works. Take-home pay (what reaches your bank account) is simplest. If you enter your gross salary, add your income taxes and other paycheck deductions in the Taxes category so the totals are accurate."
+      ],
+      [
+        "Can I add my own categories?",
+        "Yes. Click \"Add category\", type a name such as Childcare or Debt Payments, and enter the amount. You can also rename or delete any category, including the defaults. A budget can have up to 20 categories."
+      ],
+      [
+        "How is the savings rate calculated?",
+        "Savings rate is the amount in the Savings category divided by your monthly income. For example, $400 saved from $4,000 of income is a 10% savings rate. Money left over that isn't assigned is shown separately as Unassigned."
+      ],
+      [
+        "What happens if my expenses are more than my income?",
+        "You'll see a red Over budget warning showing how much you're short each month, and the chart switches to show how your total spending is split so you can spot the biggest categories to reduce."
+      ],
+      [
+        "Is my budget saved?",
+        "Your budget is saved automatically in your own browser on this device, so it's still there if you refresh the page. It is never uploaded. Press Reset to delete it."
+      ],
+      [
+        "Can I plan my budget in another currency?",
+        "Yes. Pick your currency from the Currency list above your income. All totals, percentages and the chart use it right away. Changing the currency does not convert your amounts; it only changes how they are displayed. Your choice is remembered on this device."
+      ]
     ]
   },
   {
@@ -76,7 +164,12 @@
     "title": "About WorkHours – Free Work Time & Pay Tools",
     "description": "WorkHours builds free, private and easy-to-use calculators that help U.S. workers track hours worked, calculate pay and plan a monthly budget.",
     "priority": "0.4",
-    "crumbs": [["About Us", "about/"]]
+    "crumbs": [
+      [
+        "About Us",
+        "about/"
+      ]
+    ]
   },
   {
     "path": "contact/",
@@ -84,8 +177,15 @@
     "title": "Contact Us | WorkHours",
     "description": "Contact the WorkHours team with questions, feedback or suggestions about our free work hours, pay and budget calculators.",
     "priority": "0.3",
-    "scripts": ["contact.js"],
-    "crumbs": [["Contact Us", "contact/"]]
+    "scripts": [
+      "contact.js"
+    ],
+    "crumbs": [
+      [
+        "Contact Us",
+        "contact/"
+      ]
+    ]
   },
   {
     "path": "privacy-policy/",
@@ -93,7 +193,12 @@
     "title": "Privacy Policy | WorkHours",
     "description": "How WorkHours handles your information: calculations stay in your browser, what local storage is used for, cookies and advertising disclosures.",
     "priority": "0.3",
-    "crumbs": [["Privacy Policy", "privacy-policy/"]]
+    "crumbs": [
+      [
+        "Privacy Policy",
+        "privacy-policy/"
+      ]
+    ]
   },
   {
     "path": "terms-of-use/",
@@ -101,7 +206,12 @@
     "title": "Terms of Use | WorkHours",
     "description": "The terms that apply when you use the WorkHours website and its free calculators.",
     "priority": "0.3",
-    "crumbs": [["Terms of Use", "terms-of-use/"]]
+    "crumbs": [
+      [
+        "Terms of Use",
+        "terms-of-use/"
+      ]
+    ]
   },
   {
     "path": "disclaimer/",
@@ -109,6 +219,11 @@
     "title": "Disclaimer | WorkHours",
     "description": "WorkHours calculators provide estimates for informational purposes only and are not legal, tax, payroll or financial advice.",
     "priority": "0.3",
-    "crumbs": [["Disclaimer", "disclaimer/"]]
+    "crumbs": [
+      [
+        "Disclaimer",
+        "disclaimer/"
+      ]
+    ]
   }
 ]

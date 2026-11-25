@@ -18,13 +18,180 @@
   // French uses 1 234,56; English and Arabic use 1,234.56 (Western digits, which Arabic-speaking users in the U.S. expect for money).
   var LOCALE = WH.lang === 'fr' ? 'fr-FR' : 'en-US';
 
-  /* ---------- Formatting ---------- */
-  var usd = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: 'USD' });
-  WH.money = function (n) {
-    var s = usd.format(n || 0);
-    return WH.lang === 'ar' ? '<bdi>' + s + '</bdi>' : s; // keep "$1,234.56" left-to-right inside Arabic text
+  /* ---------- Currency (display only: amounts are never converted) ---------- */
+  // Money is formatted for the page language: en-US, fr-FR, or Arabic with Western digits.
+  var MONEY_LOCALE = WH.lang === 'fr' ? 'fr-FR' : (WH.lang === 'ar' ? 'ar-u-nu-latn' : 'en-US');
+  var CUR_KEY = 'wh:currency'; // shared by all languages
+  var curListeners = [];
+  var moneyFmt = null;
+
+  function knownCodes() { return (window.WH_CURRENCIES || []).map(function (c) { return c[0]; }); }
+  function validCode(code) {
+    if (!/^[A-Z]{3}$/.test(code || '')) return false;
+    var list = knownCodes();
+    if (list.length && list.indexOf(code) === -1) return false;
+    try { new Intl.NumberFormat('en', { style: 'currency', currency: code }); return true; } catch (e) { return false; }
+  }
+  function readCurrency() {
+    try { var c = window.localStorage.getItem(CUR_KEY); if (validCode(c)) return c; } catch (e) { /* storage unavailable */ }
+    return 'USD'; // default currency
+  }
+  function buildFormatter() {
+    try { moneyFmt = new Intl.NumberFormat(MONEY_LOCALE, { style: 'currency', currency: WH.currency }); }
+    catch (e) { WH.currency = 'USD'; moneyFmt = new Intl.NumberFormat(MONEY_LOCALE, { style: 'currency', currency: 'USD' }); }
+  }
+  WH.currency = readCurrency();
+  buildFormatter();
+
+  /** Formatted amount as HTML (isolated so it reads correctly inside Arabic text). */
+  WH.money = function (n) { return '<bdi>' + WH.esc(moneyFmt.format(n || 0)) + '</bdi>'; };
+  /** Formatted amount as plain text (for attributes, aria-labels, copy). */
+  WH.moneyText = function (n) { return moneyFmt.format(n || 0); };
+
+  /** Short symbol for a currency: local symbol table, else the browser's narrow symbol, else the code. */
+  WH.curSymbol = function (code) {
+    code = code || WH.currency;
+    var own = window.WH_CURRENCY_SYMBOLS && window.WH_CURRENCY_SYMBOLS[code];
+    if (own) return own;
+    try {
+      var part = new Intl.NumberFormat('en', { style: 'currency', currency: code, currencyDisplay: 'narrowSymbol' })
+        .formatToParts(0).filter(function (p) { return p.type === 'currency'; })[0];
+      return part ? part.value : code;
+    } catch (e) { return code; }
   };
-  WH.moneyText = function (n) { return usd.format(n || 0); };
+  var displayNames = null;
+  try { displayNames = new Intl.DisplayNames([WH.lang], { type: 'currency' }); } catch (e) { displayNames = null; }
+  /** Currency name in the page language (falls back to the English name from currencies.js). */
+  WH.curName = function (code, english) {
+    var n = null;
+    try { n = displayNames ? displayNames.of(code) : null; } catch (e) { n = null; }
+    if (!n || n === code) n = english || code;
+    return n.charAt(0).toUpperCase() + n.slice(1);
+  };
+  /** "US Dollar (USD – $)" or "Swiss Franc (CHF)" when the symbol is just the code. */
+  WH.curLabel = function (code, english) {
+    var sym = WH.curSymbol(code);
+    // U+2068/U+2069 isolate the symbol so right-to-left symbols (ر.س) don't flip the closing bracket.
+    return WH.curName(code, english) + ' (' + code + (sym && sym !== code ? ' – ⁨' + sym + '⁩' : '') + ')';
+  };
+  WH.onCurrency = function (fn) { curListeners.push(fn); };
+  WH.setCurrency = function (code) {
+    if (!validCode(code) || code === WH.currency) return;
+    WH.currency = code;
+    buildFormatter();
+    try { window.localStorage.setItem(CUR_KEY, code); } catch (e) { /* storage unavailable */ }
+    WH.refreshCurrencySymbols(doc);
+    WH.$$('[data-currency-picker]').forEach(function (el) { if (el._sync) el._sync(); });
+    curListeners.forEach(function (fn) { fn(code); });
+  };
+  /** Put the current symbol in every input prefix and make room for it. */
+  WH.refreshCurrencySymbols = function (scope) {
+    var sym = WH.curSymbol();
+    WH.$$('.cur-sym', scope || doc).forEach(function (span) {
+      span.textContent = sym;
+      var input = span.parentNode.querySelector('.input');
+      if (input) input.style.paddingLeft = Math.max(28, Math.ceil(span.getBoundingClientRect().width) + 20) + 'px';
+    });
+  };
+
+  function normalize(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[ً-ْ]/g, ''); // also ignore Arabic diacritics
+  }
+
+  /**
+   * Searchable currency picker (ARIA combobox). Mount into <div data-currency-picker></div>.
+   * Type a name ("euro", "dinar", "دولار"), a code ("EUR") or a symbol ("€") to filter.
+   */
+  WH.mountCurrencyPicker = function (host) {
+    var data = window.WH_CURRENCIES;
+    if (!host || !data) return;
+    var id = WH.uid('cur');
+    var items = data.map(function (c) {
+      var label = WH.curLabel(c[0], c[1]);
+      return { code: c[0], label: label, search: normalize(label + ' ' + c[1] + ' ' + c[0] + ' ' + WH.curSymbol(c[0])) };
+    }).sort(function (a, b) { return a.label.localeCompare(b.label, WH.lang); });
+    host.classList.add('field', 'cur-field');
+    host.innerHTML =
+      '<label for="' + id + '">' + WH.t('cur.label') + '</label>' +
+      '<div class="combo">' +
+      '<input id="' + id + '" class="input combo-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" ' +
+      'aria-controls="' + id + '-list" autocomplete="off" spellcheck="false" aria-describedby="' + id + '-note">' +
+      '<svg class="combo-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+      '<ul id="' + id + '-list" class="combo-list" role="listbox" aria-label="' + WH.esc(WH.t('cur.label')) + '" hidden></ul>' +
+      '</div>' +
+      '<span class="hint" id="' + id + '-note">' + WH.t('cur.note') + '</span>';
+    var input = host.querySelector('input'), list = host.querySelector('ul');
+    var shown = [], active = -1, open = false;
+
+    function current() { for (var i = 0; i < items.length; i++) if (items[i].code === WH.currency) return items[i]; return items[0]; }
+    function sync() { if (!open) input.value = current().label; }
+    host._sync = sync;
+
+    function render(filter) {
+      var q = normalize(filter).trim();
+      shown = q ? items.filter(function (it) { return it.search.indexOf(q) !== -1; }) : items.slice();
+      if (q) { // exact code match first
+        shown.sort(function (a, b) { return (b.code.toLowerCase() === q) - (a.code.toLowerCase() === q); });
+      }
+      list.innerHTML = shown.length ? shown.map(function (it, i) {
+        var sel = it.code === WH.currency;
+        return '<li id="' + id + '-o' + i + '" role="option" class="combo-opt' + (sel ? ' selected' : '') + '" aria-selected="' + sel + '" data-code="' + it.code + '">' +
+          WH.esc(it.label) + '</li>';
+      }).join('') : '<li class="combo-empty" role="option" aria-disabled="true">' + WH.t('cur.none') + '</li>';
+      setActive(q ? 0 : Math.max(0, shown.indexOf(current())));
+    }
+    function setActive(i) {
+      var opts = list.querySelectorAll('.combo-opt');
+      if (!opts.length) { active = -1; input.removeAttribute('aria-activedescendant'); return; }
+      active = Math.max(0, Math.min(i, opts.length - 1));
+      for (var k = 0; k < opts.length; k++) opts[k].classList.toggle('active', k === active);
+      input.setAttribute('aria-activedescendant', opts[active].id);
+      var o = opts[active], top = o.offsetTop, bottom = top + o.offsetHeight;
+      if (top < list.scrollTop) list.scrollTop = top; else if (bottom > list.scrollTop + list.clientHeight) list.scrollTop = bottom - list.clientHeight;
+    }
+    function openList() {
+      if (open) return;
+      open = true; list.hidden = false; input.setAttribute('aria-expanded', 'true'); host.classList.add('open');
+      input.value = ''; input.placeholder = WH.t('cur.search');
+      render('');
+    }
+    function closeList() {
+      if (!open) return;
+      open = false; list.hidden = true; input.setAttribute('aria-expanded', 'false'); host.classList.remove('open');
+      input.removeAttribute('aria-activedescendant'); input.placeholder = '';
+      sync();
+    }
+    function choose(code) { closeList(); WH.setCurrency(code); sync(); }
+
+    input.addEventListener('focus', openList);
+    input.addEventListener('click', openList);
+    input.addEventListener('input', function (e) {
+      e.stopPropagation();
+      var typed = input.value; // keep what was typed even if the list was closed (e.g. typing right after a choice)
+      if (!open) { openList(); input.value = typed; }
+      render(typed);
+    });
+    input.addEventListener('change', function (e) { e.stopPropagation(); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (!open) openList(); else setActive(active + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (open) setActive(active - 1); }
+      else if (e.key === 'Home' && open) { e.preventDefault(); setActive(0); }
+      else if (e.key === 'End' && open) { e.preventDefault(); setActive(shown.length - 1); }
+      else if (e.key === 'Enter') { e.preventDefault(); if (open && active >= 0 && shown[active]) choose(shown[active].code); }
+      else if (e.key === 'Escape') { if (open) { e.preventDefault(); closeList(); } }
+      else if (e.key === 'Tab') { closeList(); }
+    });
+    input.addEventListener('blur', function () { setTimeout(closeList, 120); });
+    list.addEventListener('mousedown', function (e) { e.preventDefault(); }); // keep focus on the input
+    list.addEventListener('click', function (e) {
+      var li = e.target.closest('.combo-opt');
+      if (li) choose(li.getAttribute('data-code'));
+    });
+    var form = host.closest('form');
+    if (form) form.addEventListener('reset', function () { setTimeout(sync, 0); }); // Reset keeps the chosen currency
+    sync();
+  };
   WH.num = function (n, d) {
     return Number(n || 0).toLocaleString(LOCALE, { minimumFractionDigits: d == null ? 2 : d, maximumFractionDigits: d == null ? 2 : d });
   };
@@ -210,5 +377,12 @@
   }
 
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', boot); else boot();
+  function initCurrency() {
+    WH.$$('[data-currency-picker]').forEach(WH.mountCurrencyPicker);
+    WH.refreshCurrencySymbols(doc);
+  }
+
   function boot() { initNav(); initReveal(); initYear(); initPrint(); }
+  // currencies.js loads after this file, so mount the picker once every deferred script has run.
+  if (doc.readyState === 'complete') initCurrency(); else doc.addEventListener('DOMContentLoaded', initCurrency);
 })();

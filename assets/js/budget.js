@@ -61,7 +61,7 @@
         '<input id="' + nid + '" class="input bd-name-in" type="text" maxlength="40" placeholder="' + WH.esc(t('bd.catName')) + '">' +
         (it.savings ? '<span class="badge badge-green">' + t('bd.savings') + '</span>' : '') + '</div>' +
         '<div class="bd-amount"><label class="sr-only" for="' + aid + '">' + t('bd.amountFor', { name: nm }) + '</label>' +
-        '<div class="input-prefix"><span>$</span><input id="' + aid + '" class="input bd-amount-in" type="text" inputmode="decimal" autocomplete="off" placeholder="' + WH.inputNum('0.00') + '" aria-describedby="' + eid + '"></div></div>' +
+        '<div class="input-prefix"><span class="cur-sym">' + WH.esc(WH.curSymbol()) + '</span><input id="' + aid + '" class="input bd-amount-in" type="text" inputmode="decimal" autocomplete="off" placeholder="' + WH.inputNum('0.00') + '" aria-describedby="' + eid + '"></div></div>' +
         '<span class="bd-share">0%</span>' +
         '<button type="button" class="btn btn-danger-ghost btn-icon bd-del" aria-label="' + WH.esc(t('bd.delete', { name: it.name || t('bd.category') })) + '" title="' + WH.esc(t('bd.deleteTitle')) + '">' + ICON_X + '</button>' +
         '<span class="field-error bd-err" id="' + eid + '"></span>';
@@ -71,6 +71,7 @@
     });
     addBtn.disabled = items.length >= MAX_CATEGORIES;
     addSavingsBtn.hidden = items.some(function (i) { return i.savings; });
+    WH.refreshCurrencySymbols(listEl);
   }
 
   function itemFor(el) {
@@ -289,6 +290,9 @@
     nextId = 1; defaults(); renderRows(); update();
     incomeIn.focus();
   });
+
+  // A new currency only changes how amounts are shown: same numbers, no conversion.
+  WH.onCurrency(update);
 
   load();
   renderRows();

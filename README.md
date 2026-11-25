@@ -13,6 +13,8 @@ WorkHours is a simple, fast and private website for U.S. workers with three free
 
 Plus: Home, About Us, Contact Us, Privacy Policy, Terms of Use, Disclaimer and a 404 page.
 
+**Currencies:** the Pay Calculator and Salary Breakdown have a searchable **Currency** picker listing all 155 official currencies in circulation (ISO 4217, reviewed for 2026, in `assets/js/currencies.js`). You can search by name, code or symbol, in any of the three languages. USD is the default. The choice is saved in the browser (`localStorage` key `wh:currency`) and shared by both tools and all languages. Amounts are formatted with `Intl.NumberFormat`, which sets the correct decimals per currency (e.g. JPY 0, KWD 3). Changing the currency **never converts** amounts: there are no exchange rates.
+
 **Languages:** every page exists in **English** (`/`), **French** (`/fr/`) and **Arabic** (`/ar/`, full right-to-left layout), for 27 pages in total. A language switcher in the header links to the same page in the other languages. The calculators, error messages, results and budget categories are translated too. French accepts decimal commas (`18,50`) and shows `1 234,56 $US`. Arabic accepts Arabic-Indic digits (`٨:٣٠`, `٤٠٠٠`) and صباحًا/مساءً.
 
 **Tech:** HTML5, CSS3 and vanilla JavaScript only. No frameworks, CDNs, external fonts, database, backend, login or cookies. All calculations run in the visitor's browser; entries are kept only in that browser's `localStorage` so nothing is lost on refresh.

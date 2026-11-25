@@ -36,7 +36,7 @@
 
   function emptyState() {
     resultsEl.innerHTML = '<h2>' + t('pay.title') + '</h2><p class="results-empty">' + t('pay.empty1') + '</p>' +
-      '<p class="results-empty">' + t('pay.empty2') + '</p>';
+      '<p class="results-empty">' + t('pay.empty2', { rate: WH.money(20), total: WH.money(800) }) + '</p>';
   }
 
   function calculate() {
@@ -132,6 +132,9 @@
       f.rate.focus();
     }, 0);
   });
+
+  // A new currency only changes how amounts are shown: same numbers, no conversion.
+  WH.onCurrency(function () { if (live) run(false); else emptyState(); });
 
   var wasLive = load();
   syncLabels();

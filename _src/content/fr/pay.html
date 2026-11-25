@@ -9,9 +9,10 @@
       <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
         <h2 id="pay-title">Votre taux et vos heures</h2>
         <div class="form-grid">
+          <div class="span-2" data-currency-picker></div>
           <div class="field">
             <label for="pay-rate">Taux horaire</label>
-            <div class="input-prefix"><span>$</span><input id="pay-rate" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20,00" aria-describedby="pay-rate-err"></div>
+            <div class="input-prefix"><span class="cur-sym">$</span><input id="pay-rate" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20,00" aria-describedby="pay-rate-err"></div>
             <span class="field-error" id="pay-rate-err"></span>
           </div>
           <div class="field">
