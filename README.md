@@ -1,5 +1,8 @@
 # WorkHours — Free Work Hours, Pay & Salary Breakdown Calculators
 
+**Live:** https://zakidebach.github.io/workhours/ (French: `/fr/`, Arabic: `/ar/`). It is hosted on GitHub Pages and redeploys on every push to `main`.
+Next steps (Search Console, custom domain, AdSense) are in [LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md).
+
 WorkHours is a simple, fast and private website for U.S. workers with three free tools:
 
 | Tool | URL | What it does |
