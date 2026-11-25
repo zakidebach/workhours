@@ -74,11 +74,12 @@
     "app_name": "Calculateur de salaire horaire",
     "kind": "tool",
     "title": "Calculateur de salaire horaire – Paie journalière, hebdomadaire, mensuelle | WorkHours",
-    "description": "Calculateur de salaire horaire gratuit. Saisissez votre taux horaire et vos heures pour obtenir votre salaire brut journalier, hebdomadaire, mensuel et annuel, avec heures supplémentaires.",
+    "description": "Calculateur de salaire horaire gratuit. Saisissez votre taux horaire et vos heures pour obtenir votre salaire brut journalier, hebdomadaire, mensuel et annuel, avec heures supplémentaires. Convertissez aussi un salaire par minute, heure, jour, semaine, mois ou an.",
     "priority": "0.8",
     "scripts": [
       "currencies.js",
-      "pay.js"
+      "pay.js",
+      "payrate.js"
     ],
     "crumbs": [
       [
@@ -90,6 +91,10 @@
       [
         "Comment convertir un salaire horaire en salaire annuel ?",
         "Multipliez votre taux horaire par le nombre d'heures travaillées par semaine, puis par 52. Par exemple, 22 $ × 40 × 52 = 45 760 $ par an avant impôts."
+      ],
+      [
+        "Comment convertir mon salaire annuel en taux horaire ?",
+        "Choisissez « Convertir un taux de salaire », saisissez votre salaire et sélectionnez « Par an » (ou « Par mois »). Le calculateur divise par vos heures de travail : par défaut 8 heures × 5 jours × 52 semaines = 2 080 heures par an. Par exemple, 52 000 par an correspondent à 25,00 de l'heure. Ajustez les heures, jours et semaines selon votre rythme réel."
       ],
       [
         "Quelle différence entre une paie toutes les deux semaines et deux fois par mois ?",

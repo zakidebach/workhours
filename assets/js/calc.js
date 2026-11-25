@@ -161,6 +161,30 @@
     };
   }
 
+  /* ---------- Pay-rate conversion between time units ---------- */
+
+  var RATE_UNITS = ['minute', 'hour', 'day', 'week', 'month', 'year'];
+
+  /**
+   * Convert a pay rate from one time unit to all others, using a work schedule.
+   * Everything goes through the annual amount:
+   *   minutes/yr = 60 × h × d × w, hours/yr = h × d × w, days/yr = d × w, weeks/yr = w, months/yr = 12.
+   * A month is therefore w ÷ 12 weeks (52 ÷ 12 ≈ 4.33 by default), never exactly 4 weeks.
+   * Only time units are converted; the currency is never changed.
+   * @param {object} o {amount, unit, hoursPerDay=8, daysPerWeek=5, weeksPerYear=52}
+   */
+  function convertRate(o) {
+    var h = o.hoursPerDay == null ? 8 : o.hoursPerDay;
+    var d = o.daysPerWeek == null ? 5 : o.daysPerWeek;
+    var w = o.weeksPerYear == null ? 52 : o.weeksPerYear;
+    var perYear = { minute: 60 * h * d * w, hour: h * d * w, day: d * w, week: w, month: 12, year: 1 };
+    if (!perYear[o.unit]) throw new Error('Unknown unit');
+    var annual = o.amount * perYear[o.unit];
+    var values = {};
+    RATE_UNITS.forEach(function (u) { values[u] = annual / perYear[u]; });
+    return { annual: annual, values: values, perYear: perYear, hoursPerYear: h * d * w, weeksPerMonth: w / 12 };
+  }
+
   /* ---------- Budget ---------- */
 
   /**
@@ -201,6 +225,8 @@
     workShift: workShift,
     PERIODS: PERIODS,
     payCalc: payCalc,
+    RATE_UNITS: RATE_UNITS,
+    convertRate: convertRate,
     budgetSummary: budgetSummary,
     round2: round2
   };

@@ -2,9 +2,13 @@
   <header class="page-hero">
     <h1>Calculateur de salaire horaire</h1>
     <p class="lead">Calculez votre salaire brut à partir de votre taux horaire et de vos heures de travail. Choisissez une paie journalière, hebdomadaire, toutes les deux semaines, mensuelle ou annuelle, ajoutez vos heures supplémentaires et voyez le détail du calcul.</p>
+    <div class="segmented mode-switch" role="radiogroup" aria-label="Mode du calculateur">
+      <label><input type="radio" name="pay-mode" value="hours" checked><span>Calculer à partir des heures</span></label>
+      <label><input type="radio" name="pay-mode" value="convert"><span>Convertir un taux de salaire</span></label>
+    </div>
   </header>
 
-  <div class="calc-layout">
+  <div class="calc-layout" id="pay-hours-mode">
     <section class="card calc-panel" aria-labelledby="pay-title">
       <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
         <h2 id="pay-title">Votre taux et vos heures</h2>
@@ -57,6 +61,73 @@
 
     <aside class="card results" id="pay-results" aria-live="polite" aria-label="Résultats du salaire"></aside>
   </div>
+  <div class="calc-layout" id="pay-convert-mode" hidden>
+    <section class="card calc-panel" aria-labelledby="rc-title">
+      <form id="rate-form" novalidate>
+        <h2 id="rc-title">Convertir votre taux de salaire</h2>
+        <div class="form-grid">
+          <div class="span-2" data-currency-picker></div>
+          <div class="field">
+            <label for="rc-amount">Je gagne</label>
+            <div class="input-prefix"><span class="cur-sym">$</span><input id="rc-amount" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20" aria-describedby="rc-amount-err"></div>
+            <span class="field-error" id="rc-amount-err"></span>
+          </div>
+          <div class="field">
+            <label for="rc-unit">Par</label>
+            <select id="rc-unit" class="input">
+              <option value="minute">Par minute</option>
+              <option value="hour" selected>Par heure</option>
+              <option value="day">Par jour</option>
+              <option value="week">Par semaine</option>
+              <option value="month">Par mois</option>
+              <option value="year">Par an</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="rc-target">Afficher l'équivalent</label>
+            <select id="rc-target" class="input">
+              <option value="minute">Par minute</option>
+              <option value="hour">Par heure</option>
+              <option value="day">Par jour</option>
+              <option value="week">Par semaine</option>
+              <option value="month">Par mois</option>
+              <option value="year" selected>Par an</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="rc-settings">
+          <legend>Rythme de travail utilisé pour la conversion</legend>
+          <div class="form-grid cols-3">
+            <div class="field">
+              <label for="rc-hpd">Heures par jour</label>
+              <div class="input-suffix"><input id="rc-hpd" class="input" type="text" inputmode="decimal" autocomplete="off" value="8" aria-describedby="rc-hpd-err"><span>h</span></div>
+              <span class="field-error" id="rc-hpd-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-dpw">Jours par semaine</label>
+              <div class="input-suffix"><input id="rc-dpw" class="input" type="text" inputmode="decimal" autocomplete="off" value="5" aria-describedby="rc-dpw-err"><span>jours</span></div>
+              <span class="field-error" id="rc-dpw-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-wpy">Semaines par an</label>
+              <div class="input-suffix"><input id="rc-wpy" class="input" type="text" inputmode="decimal" autocomplete="off" value="52" aria-describedby="rc-wpy-err"><span>sem.</span></div>
+              <span class="field-error" id="rc-wpy-err"></span>
+            </div>
+          </div>
+          <p class="hint rc-hint">Par défaut : 8 heures par jour, 5 jours par semaine, 52 semaines par an. Un mois = 52 &divide; 12 &asymp; 4,33 semaines, et non 4.</p>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Convertir</button>
+          <button type="reset" class="btn btn-outline btn-lg">Réinitialiser</button>
+        </div>
+        <div id="rc-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="rc-results" aria-live="polite" aria-label="Résultats de la conversion du salaire"></aside>
+  </div>
 </div>
 
 {{more_tools}}
@@ -85,6 +156,14 @@
         </tbody>
       </table>
       <p>Le salaire mensuel n'est pas simplement quatre semaines de salaire. Une année compte 52 semaines, donc un mois moyen compte environ 4,33 semaines. Multiplier le salaire hebdomadaire par 4 sous-estime votre revenu mensuel d'environ 8 %.</p>
+
+      <h2>Convertir un salaire entre minute, heure, jour, semaine, mois et année</h2>
+      <p>Choisissez <strong>Convertir un taux de salaire</strong> en haut de cette page, saisissez ce que vous gagnez et l'unité de paiement : le calculateur affiche le même salaire par minute, heure, jour, semaine, mois et an. Il passe par le total annuel, selon le rythme de travail que vous indiquez :</p>
+      <p class="formula">Heures par an = Heures par jour &times; Jours par semaine &times; Semaines par an<br>Par an = Salaire &times; (nombre de cette unité dans une année)<br>Par mois = Par an &divide; 12 &nbsp;&nbsp;(un mois = 52 &divide; 12 &asymp; 4,33 semaines)<br>Par minute = Par heure &divide; 60</p>
+      <div class="example">
+        <p><strong>Exemple :</strong> 20,00 $ de l'heure avec 8 heures par jour, 5 jours par semaine et 52 semaines par an (2 080 heures) équivalent à environ 0,33 $ par minute, 160,00 $ par jour, 800,00 $ par semaine, 3 466,67 $ par mois et 41 600,00 $ par an.</p>
+      </div>
+      <p>Les résultats sont des estimations : ils supposent que vous travaillez exactement ce rythme chaque semaine de l'année et n'incluent ni congés non payés, ni heures supplémentaires, ni primes, impôts ou retenues. Modifiez le rythme si vous travaillez à temps partiel, moins de semaines ou des journées plus longues. La devise choisie change seulement l'affichage : rien n'est converti d'une devise à l'autre.</p>
 
       <h2>À propos des heures supplémentaires</h2>
       <p>Aux États-Unis, la loi fédérale sur les normes de travail (FLSA) prévoit que la plupart des salariés payés à l'heure et <strong>non exemptés</strong> reçoivent au moins 1,5 fois leur taux normal pour les heures au-delà de 40 heures par semaine de travail. Cette règle ne s'applique toutefois pas à tout le monde :</p>

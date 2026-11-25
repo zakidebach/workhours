@@ -404,6 +404,22 @@ table { border-collapse: collapse; width: 100%; }
 }
 @media print { .more-tools { display: none !important; } }
 
+/* Pay Calculator modes + pay-rate converter */
+.mode-switch { margin-top: 18px; }
+.mode-switch span { padding: 10px 18px; font-size: .95rem; }
+.mode-switch input:checked + span { background: var(--navy-800); color: #fff; }
+.form-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rc-settings { margin: 22px 0 0; padding: 16px 18px 6px; border: 1px solid var(--gray-200); border-radius: var(--radius); background: var(--blue-50); min-width: 0; }
+.rc-settings legend { padding: 0 6px; font-weight: 700; font-size: .92rem; color: var(--navy-900); }
+.rc-settings .input { background: #fff; }
+.rc-hint { font-size: .84rem; color: var(--gray-500); margin: 12px 0 10px; }
+@media (max-width: 640px) {
+  .form-grid.cols-3 { grid-template-columns: 1fr; }
+  .mode-switch { display: flex; width: 100%; }
+  .mode-switch label { flex: 1; }
+  .mode-switch span { text-align: center; padding: 10px 8px; font-size: .88rem; }
+}
+
 /* Currency picker (searchable combobox) */
 .cur-field { margin-bottom: 18px; }
 .combo { position: relative; }

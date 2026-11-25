@@ -2,9 +2,13 @@
   <header class="page-hero">
     <h1>حاسبة الأجر بالساعة</h1>
     <p class="lead">اعرف أجرك الإجمالي من أجرك بالساعة وعدد ساعات عملك. اختر الأجر اليومي أو الأسبوعي أو كل أسبوعين أو الشهري أو السنوي، وأضف ساعاتك الإضافية إن وُجدت، وشاهد بالضبط كيف حُسب المجموع.</p>
+    <div class="segmented mode-switch" role="radiogroup" aria-label="وضع حاسبة الأجر">
+      <label><input type="radio" name="pay-mode" value="hours" checked><span>الحساب من الساعات</span></label>
+      <label><input type="radio" name="pay-mode" value="convert"><span>تحويل وحدة الأجر</span></label>
+    </div>
   </header>
 
-  <div class="calc-layout">
+  <div class="calc-layout" id="pay-hours-mode">
     <section class="card calc-panel" aria-labelledby="pay-title">
       <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
         <h2 id="pay-title">أجرك وساعاتك</h2>
@@ -57,6 +61,73 @@
 
     <aside class="card results" id="pay-results" aria-live="polite" aria-label="نتائج الأجر"></aside>
   </div>
+  <div class="calc-layout" id="pay-convert-mode" hidden>
+    <section class="card calc-panel" aria-labelledby="rc-title">
+      <form id="rate-form" novalidate>
+        <h2 id="rc-title">حوّل أجرك بين الفترات</h2>
+        <div class="form-grid">
+          <div class="span-2" data-currency-picker></div>
+          <div class="field">
+            <label for="rc-amount">أتقاضى</label>
+            <div class="input-prefix"><span class="cur-sym">$</span><input id="rc-amount" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20" aria-describedby="rc-amount-err"></div>
+            <span class="field-error" id="rc-amount-err"></span>
+          </div>
+          <div class="field">
+            <label for="rc-unit">لكل</label>
+            <select id="rc-unit" class="input">
+              <option value="minute">بالدقيقة</option>
+              <option value="hour" selected>بالساعة</option>
+              <option value="day">باليوم</option>
+              <option value="week">بالأسبوع</option>
+              <option value="month">بالشهر</option>
+              <option value="year">بالسنة</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="rc-target">اعرض المقابل</label>
+            <select id="rc-target" class="input">
+              <option value="minute">بالدقيقة</option>
+              <option value="hour">بالساعة</option>
+              <option value="day">باليوم</option>
+              <option value="week">بالأسبوع</option>
+              <option value="month">بالشهر</option>
+              <option value="year" selected>بالسنة</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="rc-settings">
+          <legend>جدول العمل المستخدم في التحويل</legend>
+          <div class="form-grid cols-3">
+            <div class="field">
+              <label for="rc-hpd">ساعات العمل في اليوم</label>
+              <div class="input-suffix"><input id="rc-hpd" class="input" type="text" inputmode="decimal" autocomplete="off" value="8" aria-describedby="rc-hpd-err"><span>ساعة</span></div>
+              <span class="field-error" id="rc-hpd-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-dpw">أيام العمل في الأسبوع</label>
+              <div class="input-suffix"><input id="rc-dpw" class="input" type="text" inputmode="decimal" autocomplete="off" value="5" aria-describedby="rc-dpw-err"><span>يوم</span></div>
+              <span class="field-error" id="rc-dpw-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-wpy">أسابيع العمل في السنة</label>
+              <div class="input-suffix"><input id="rc-wpy" class="input" type="text" inputmode="decimal" autocomplete="off" value="52" aria-describedby="rc-wpy-err"><span>أسبوع</span></div>
+              <span class="field-error" id="rc-wpy-err"></span>
+            </div>
+          </div>
+          <p class="hint rc-hint">القيم الافتراضية: 8 ساعات يوميًا، 5 أيام أسبوعيًا، 52 أسبوعًا في السنة. الشهر = 52 &divide; 12 &asymp; 4.33 أسبوع وليس 4 أسابيع.</p>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">حوّل الأجر</button>
+          <button type="reset" class="btn btn-outline btn-lg">إعادة الضبط</button>
+        </div>
+        <div id="rc-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="rc-results" aria-live="polite" aria-label="نتائج تحويل الأجر"></aside>
+  </div>
 </div>
 
 {{more_tools}}
@@ -85,6 +156,14 @@
         </tbody>
       </table>
       <p>الراتب الشهري ليس مجرد أجر أربعة أسابيع. في السنة 52 أسبوعًا، أي أن الشهر يضم في المتوسط نحو 4.33 أسبوع. ضرب الأجر الأسبوعي في 4 يقلّل دخلك الشهري بنحو 8%.</p>
+
+      <h2>تحويل الأجر بين الدقيقة والساعة واليوم والأسبوع والشهر والسنة</h2>
+      <p>اختر <strong>تحويل وحدة الأجر</strong> أعلى هذه الصفحة، وأدخل المبلغ الذي تتقاضاه ووحدته، فتعرض الحاسبة الأجر نفسه بالدقيقة والساعة واليوم والأسبوع والشهر والسنة. يتم الحساب عبر المجموع السنوي وفق جدول العمل الذي تحدده:</p>
+      <p class="formula">ساعات العمل في السنة = ساعات اليوم &times; أيام الأسبوع &times; أسابيع السنة<br>الأجر السنوي = الأجر &times; (عدد هذه الوحدة في السنة)<br>الأجر الشهري = الأجر السنوي &divide; 12 &nbsp;&nbsp;(الشهر = 52 &divide; 12 &asymp; 4.33 أسبوع)<br>الأجر بالدقيقة = الأجر بالساعة &divide; 60</p>
+      <div class="example">
+        <p><strong>مثال:</strong> 20.00$ في الساعة مع 8 ساعات يوميًا و5 أيام أسبوعيًا و52 أسبوعًا في السنة (2,080 ساعة) تعادل تقريبًا 0.33$ في الدقيقة، و160.00$ في اليوم، و800.00$ في الأسبوع، و3,466.67$ في الشهر، و41,600.00$ في السنة.</p>
+      </div>
+      <p>النتائج تقديرية: تفترض أنك تعمل بهذا الجدول كل أسبوع من السنة، ولا تشمل الإجازات غير المدفوعة أو الساعات الإضافية أو المكافآت أو الضرائب أو الاقتطاعات. غيّر الجدول إذا كنت تعمل بدوام جزئي أو عددًا أقل من الأسابيع أو أيامًا أطول. العملة التي تختارها تغيّر طريقة العرض فقط ولا يتم أي تحويل بين العملات.</p>
 
       <h2>عن الساعات الإضافية</h2>
       <p>وفق قانون معايير العمل العادلة الفيدرالي الأمريكي (FLSA)، يجب أن يحصل معظم الموظفين بالساعة <strong>غير المستثنين</strong> على 1.5 ضعف أجرهم العادي على الأقل عن الساعات التي تزيد على 40 ساعة في أسبوع العمل. لكن هذه القاعدة لا تنطبق على الجميع:</p>

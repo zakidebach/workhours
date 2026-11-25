@@ -2,9 +2,13 @@
   <header class="page-hero">
     <h1>Hourly Pay Calculator</h1>
     <p class="lead">Find your gross pay from your hourly rate and the hours you work. Choose daily, weekly, biweekly, monthly or annual pay, add overtime if you have it, and see exactly how the total was calculated.</p>
+    <div class="segmented mode-switch" role="radiogroup" aria-label="Pay calculator mode">
+      <label><input type="radio" name="pay-mode" value="hours" checked><span>Calculate from hours</span></label>
+      <label><input type="radio" name="pay-mode" value="convert"><span>Convert a pay rate</span></label>
+    </div>
   </header>
 
-  <div class="calc-layout">
+  <div class="calc-layout" id="pay-hours-mode">
     <section class="card calc-panel" aria-labelledby="pay-title">
       <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
         <h2 id="pay-title">Your rate &amp; hours</h2>
@@ -57,6 +61,73 @@
 
     <aside class="card results" id="pay-results" aria-live="polite" aria-label="Pay results"></aside>
   </div>
+  <div class="calc-layout" id="pay-convert-mode" hidden>
+    <section class="card calc-panel" aria-labelledby="rc-title">
+      <form id="rate-form" novalidate>
+        <h2 id="rc-title">Convert your pay rate</h2>
+        <div class="form-grid">
+          <div class="span-2" data-currency-picker></div>
+          <div class="field">
+            <label for="rc-amount">I earn</label>
+            <div class="input-prefix"><span class="cur-sym">$</span><input id="rc-amount" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20" aria-describedby="rc-amount-err"></div>
+            <span class="field-error" id="rc-amount-err"></span>
+          </div>
+          <div class="field">
+            <label for="rc-unit">Per</label>
+            <select id="rc-unit" class="input">
+              <option value="minute">Per minute</option>
+              <option value="hour" selected>Per hour</option>
+              <option value="day">Per day</option>
+              <option value="week">Per week</option>
+              <option value="month">Per month</option>
+              <option value="year">Per year</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="rc-target">Show the equivalent</label>
+            <select id="rc-target" class="input">
+              <option value="minute">Per minute</option>
+              <option value="hour">Per hour</option>
+              <option value="day">Per day</option>
+              <option value="week">Per week</option>
+              <option value="month">Per month</option>
+              <option value="year" selected>Per year</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="rc-settings">
+          <legend>Work schedule used for the conversion</legend>
+          <div class="form-grid cols-3">
+            <div class="field">
+              <label for="rc-hpd">Hours per day</label>
+              <div class="input-suffix"><input id="rc-hpd" class="input" type="text" inputmode="decimal" autocomplete="off" value="8" aria-describedby="rc-hpd-err"><span>hrs</span></div>
+              <span class="field-error" id="rc-hpd-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-dpw">Days per week</label>
+              <div class="input-suffix"><input id="rc-dpw" class="input" type="text" inputmode="decimal" autocomplete="off" value="5" aria-describedby="rc-dpw-err"><span>days</span></div>
+              <span class="field-error" id="rc-dpw-err"></span>
+            </div>
+            <div class="field">
+              <label for="rc-wpy">Weeks per year</label>
+              <div class="input-suffix"><input id="rc-wpy" class="input" type="text" inputmode="decimal" autocomplete="off" value="52" aria-describedby="rc-wpy-err"><span>weeks</span></div>
+              <span class="field-error" id="rc-wpy-err"></span>
+            </div>
+          </div>
+          <p class="hint rc-hint">Defaults: 8 hours a day, 5 days a week, 52 weeks a year. A month is 52 &divide; 12 &asymp; 4.33 weeks, not 4.</p>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Convert pay</button>
+          <button type="reset" class="btn btn-outline btn-lg">Reset</button>
+        </div>
+        <div id="rc-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="rc-results" aria-live="polite" aria-label="Pay rate conversion results"></aside>
+  </div>
 </div>
 
 {{more_tools}}
@@ -85,6 +156,14 @@
         </tbody>
       </table>
       <p>Monthly pay is not simply four weeks of pay. A year has 52 weeks, so an average month has about 4.33 weeks. Multiplying weekly pay by 4 understates your monthly income by roughly 8%.</p>
+
+      <h2>Converting pay between minutes, hours, days, weeks, months and years</h2>
+      <p>Choose <strong>Convert a pay rate</strong> at the top of this page, enter what you earn and the unit it is paid in, and the calculator shows the same pay per minute, hour, day, week, month and year. It works through the yearly total, using the work schedule you set:</p>
+      <p class="formula">Hours per year = Hours per day &times; Days per week &times; Weeks per year<br>Per year = Pay &times; (number of that unit in a year)<br>Per month = Per year &divide; 12 &nbsp;&nbsp;(a month = 52 &divide; 12 &asymp; 4.33 weeks)<br>Per minute = Per hour &divide; 60</p>
+      <div class="example">
+        <p><strong>Example:</strong> $20.00 per hour with 8 hours a day, 5 days a week and 52 weeks a year (2,080 hours) equals about $0.33 per minute, $160.00 per day, $800.00 per week, $3,466.67 per month and $41,600.00 per year.</p>
+      </div>
+      <p>Results are estimates: they assume you work exactly that schedule every week of the year, and they don't include unpaid leave, overtime, bonuses, taxes or deductions. Change the schedule if you work part-time, have fewer working weeks, or work longer days. The currency you pick only changes how amounts are shown; nothing is converted between currencies.</p>
 
       <h2>About overtime</h2>
       <p>Under the federal Fair Labor Standards Act (FLSA), most hourly employees who are <strong>non-exempt</strong> must be paid at least 1.5 times their regular rate for hours worked over 40 in a workweek. However, the rule does not apply to everyone:</p>

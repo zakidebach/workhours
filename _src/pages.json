@@ -76,11 +76,12 @@
     "kind": "tool",
     "nav": "Pay Calculator",
     "title": "Hourly Pay Calculator – Daily, Weekly, Monthly & Annual Pay | WorkHours",
-    "description": "Free hourly pay calculator. Enter your hourly rate and hours to see gross daily, weekly, biweekly, monthly and annual pay, with optional overtime at 1.5x.",
+    "description": "Free hourly pay calculator. Enter your hourly rate and hours to see gross daily, weekly, biweekly, monthly and annual pay, with optional overtime at 1.5x. Convert pay per minute, hour, day, week, month or year.",
     "priority": "0.9",
     "scripts": [
       "currencies.js",
-      "pay.js"
+      "pay.js",
+      "payrate.js"
     ],
     "crumbs": [
       [
@@ -92,6 +93,10 @@
       [
         "How do I convert an hourly wage to a yearly salary?",
         "Multiply your hourly rate by the hours you work each week, then by 52. For example, $22 × 40 × 52 = $45,760 a year before taxes."
+      ],
+      [
+        "How do I convert my salary to an hourly rate?",
+        "Choose \"Convert a pay rate\", enter your salary and select \"Per year\" (or \"Per month\"). The calculator divides by your working hours: by default 8 hours × 5 days × 52 weeks = 2,080 hours a year. For example, 52,000 a year is 25.00 per hour. Adjust the hours, days and weeks to match your real schedule."
       ],
       [
         "What's the difference between biweekly and semi-monthly?",
