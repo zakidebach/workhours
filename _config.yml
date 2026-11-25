@@ -4,6 +4,6 @@
 exclude:
   - README.md
   - LAUNCH-CHECKLIST.md
-  - '*.zip'
+  - "*.zip"
   - .gitignore
-
+  - .gitattributes
