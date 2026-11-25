@@ -188,6 +188,8 @@ def footer(lang, r):
       <div>
         <a class="brand" href="%(home)s">%(logo)s<span>Work<b>Hours</b></span></a>
         <p>%(about)s</p>
+        <h2 class="footer-contact-title">%(h_contact)s</h2>
+        <p class="footer-contact"><a href="mailto:%(email)s" dir="ltr">%(email)s</a></p>
       </div>
       <div>
         <h2>%(h_tools)s</h2>
@@ -209,7 +211,7 @@ def footer(lang, r):
   </div>
 </footer>""" % {
         "home": r or "./", "logo": LOGO, "year": BUILD_DATE[:4],
-        "about": esc(u(lang, "footer_about")), "rights": esc(u(lang, "rights")), "note": esc(u(lang, "footer_note")),
+        "about": esc(u(lang, "footer_about")), "h_contact": esc(u(lang, "h_contact")), "email": esc(EMAIL), "rights": esc(u(lang, "rights")), "note": esc(u(lang, "footer_note")),
         "h_tools": esc(u(lang, "h_tools")), "h_company": esc(u(lang, "h_company")), "h_legal": esc(u(lang, "h_legal")),
         "tools": link("work-hours-calculator/", "tool.hours.name") + link("pay-calculator/", "tool.pay.name") + link("salary-breakdown/", "tool.budget.name"),
         "company": link("about/", "nav.about") + link("contact/", "contact"),

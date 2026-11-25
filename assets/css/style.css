@@ -531,6 +531,9 @@ table { border-collapse: collapse; width: 100%; }
 .footer-grid li { margin-bottom: 8px; }
 .site-footer .brand { color: #fff; margin-bottom: 12px; }
 .site-footer .brand span b { color: #5fd3a8; }
+.footer-grid h2.footer-contact-title { margin: 18px 0 6px; }
+.footer-contact { margin: 0; word-break: break-all; }
+.footer-contact a { color: #5fd3a8; font-weight: 600; }
 .footer-bottom { border-top: 1px solid rgba(255, 255, 255, .12); margin-top: 40px; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: .85rem; }
 
 /* 10. Ad slots — collapsed until real ad code is pasted inside.
