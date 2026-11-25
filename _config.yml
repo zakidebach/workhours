@@ -3,6 +3,7 @@
 # (such as _src and _tools) are never published.
 exclude:
   - README.md
+  - LAUNCH-CHECKLIST.md
   - '*.zip'
   - .gitignore
 
