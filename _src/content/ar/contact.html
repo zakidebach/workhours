@@ -1,0 +1,45 @@
+<div class="container container-narrow content">
+  <article class="prose" style="max-width:none">
+    <h1>اتصل بنا</h1>
+    <p>لديك سؤال أو ملاحظة، أو تعتقد أن أحد الحسابات خاطئ، أو لديك فكرة لتحسين الموقع؟ يسعدنا أن نسمع منك. نقرأ كل رسالة ونحاول الرد خلال بضعة أيام عمل.</p>
+    <p>البريد الإلكتروني: <a href="mailto:{{email}}" dir="ltr">{{email}}</a></p>
+  </article>
+
+  <section class="card" style="margin-top:12px" aria-labelledby="cf-title">
+    <h2 id="cf-title" style="font-size:1.25rem">أرسل لنا رسالة</h2>
+    <p style="color:var(--gray-600);font-size:.95rem">يفتح هذا النموذج رسالة بريد جاهزة في تطبيق البريد لديك. لا يُرسل أي شيء حتى تضغط «إرسال» في ذلك التطبيق، ولا تُخزَّن أي بيانات على هذا الموقع.</p>
+    <form id="contact-form" data-email="{{email}}" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="cf-name">اسمك</label>
+          <input id="cf-name" class="input" type="text" autocomplete="name" maxlength="80" aria-describedby="cf-name-err" required>
+          <span class="field-error" id="cf-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="cf-topic">الموضوع</label>
+          <select id="cf-topic" class="input">
+            <option>سؤال عام</option>
+            <option>الإبلاغ عن مشكلة في الحساب</option>
+            <option>اقتراح ميزة</option>
+            <option>إعلانات أو شراكة</option>
+            <option>طلب متعلق بالخصوصية</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label for="cf-message">الرسالة</label>
+          <textarea id="cf-message" class="input" rows="6" maxlength="3000" aria-describedby="cf-message-err cf-message-hint" required style="resize:vertical"></textarea>
+          <span class="hint" id="cf-message-hint">يرجى عدم إدراج معلومات شخصية أو مالية حساسة.</span>
+          <span class="field-error" id="cf-message-err"></span>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-green">افتح البريد للإرسال</button>
+      </div>
+      <div id="cf-status" class="form-status" role="status"></div>
+    </form>
+  </section>
+
+  <div class="notice" style="margin-top:24px">
+    <p><strong>ملاحظة:</strong> لا يمكننا تقديم استشارات قانونية أو ضريبية أو استشارات رواتب شخصية. لأي سؤال عن وضعك الخاص، تواصل مع قسم الموارد البشرية أو الرواتب لدى صاحب العمل، أو جهة العمل المختصة، أو مختص مؤهل.</p>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+[
+  {
+    "path": "",
+    "content": "home.html",
+    "title": "WorkHours – Calculateurs gratuits d'heures de travail, de salaire et de budget",
+    "description": "Calculez vos heures de travail, votre salaire horaire et la répartition de votre salaire mensuel. Outils gratuits, simples et privés, sans inscription.",
+    "priority": "0.8",
+    "faq": [
+      ["WorkHours est-il gratuit ?", "Oui. Les trois outils sont entièrement gratuits, sans compte, sans inscription et sans limite d'utilisation."],
+      ["Enregistrez-vous ou voyez-vous mes informations ?", "Non. Tous les calculs se font dans votre navigateur et rien de ce que vous saisissez n'est envoyé à nos serveurs. Pour éviter de perdre votre travail, vos dernières saisies sont conservées uniquement dans votre navigateur, sur cet appareil. Vous pouvez les effacer à tout moment avec le bouton Effacer ou Réinitialiser."],
+      ["Comment calculer mes heures de travail ?", "Soustrayez l'heure de début de l'heure de fin, puis retirez la pause non payée. Par exemple, de 8:00 à 17:00, cela fait 9 heures ; moins 1 heure de déjeuner, vous avez travaillé 8 heures. Le <a href=\"{{root}}work-hours-calculator/\">calculateur d'heures de travail</a> le fait pour vous, y compris pour les postes qui finissent après minuit."],
+      ["Le calculateur de salaire déduit-il les impôts ?", "Non. Il affiche le salaire brut, c'est-à-dire avant impôts et retenues, car ceux-ci dépendent de votre situation personnelle. Vous pouvez ajouter vos impôts comme catégorie dans l'outil <a href=\"{{root}}salary-breakdown/\">Répartition du salaire</a>."],
+      ["Les heures supplémentaires sont-elles toujours payées 1,5 fois le taux normal ?", "Pas toujours. Selon la loi fédérale américaine, les salariés non exemptés reçoivent en général au moins 1,5 fois leur taux normal au-delà de 40 heures par semaine de travail, mais certains salariés sont exemptés et les règles varient selon les États. C'est pourquoi l'option 1,5× du calculateur de salaire est facultative et présentée comme une estimation."],
+      ["Puis-je utiliser WorkHours sur mon téléphone ?", "Oui. Toutes les pages fonctionnent sur téléphone, tablette et ordinateur, dans tout navigateur récent."]
+    ]
+  },
+  {
+    "path": "work-hours-calculator/",
+    "content": "work-hours.html",
+    "app_name": "Calculateur d'heures de travail",
+    "kind": "tool",
+    "title": "Calculateur d'heures de travail gratuit – Calculer ses heures | WorkHours",
+    "description": "Calculateur d'heures de travail gratuit : saisissez l'heure de début, l'heure de fin et la pause pour obtenir vos heures en heures, minutes et heures décimales. Postes de nuit inclus.",
+    "priority": "0.8",
+    "scripts": ["workhours.js"],
+    "crumbs": [["Calculateur d'heures de travail", "work-hours-calculator/"]],
+    "faq": [
+      ["Comment calculer les heures d'un poste de nuit ?", "Saisissez simplement les vraies heures de début et de fin, par exemple 22:00 et 6:30. Comme l'heure de fin est plus tôt que l'heure de début, le calculateur comprend que le poste se termine le lendemain et affiche 8 h 30 min."],
+      ["Comment saisir une pause d'une heure ?", "Tapez 1 et choisissez « heures » dans le menu à côté du champ de pause, ou tapez 60 en gardant « minutes ». Les deux donnent le même résultat."],
+      ["Quelle est la différence entre la durée totale et les heures nettes ?", "La durée totale correspond à tout le temps entre l'heure de début et l'heure de fin. Les heures nettes travaillées sont la durée totale moins la pause non payée, c'est-à-dire le temps normalement rémunéré."],
+      ["Comment convertir des minutes en heures décimales ?", "Divisez les minutes par 60. Par exemple, 45 minutes font 0,75 heure, donc 7 h 45 min font 7,75 heures décimales. Le calculateur affiche les deux formats."]
+    ]
+  },
+  {
+    "path": "pay-calculator/",
+    "content": "pay.html",
+    "app_name": "Calculateur de salaire horaire",
+    "kind": "tool",
+    "title": "Calculateur de salaire horaire – Paie journalière, hebdomadaire, mensuelle | WorkHours",
+    "description": "Calculateur de salaire horaire gratuit. Saisissez votre taux horaire et vos heures pour obtenir votre salaire brut journalier, hebdomadaire, mensuel et annuel, avec heures supplémentaires.",
+    "priority": "0.8",
+    "scripts": ["pay.js"],
+    "crumbs": [["Calculateur de salaire", "pay-calculator/"]],
+    "faq": [
+      ["Comment convertir un salaire horaire en salaire annuel ?", "Multipliez votre taux horaire par le nombre d'heures travaillées par semaine, puis par 52. Par exemple, 22 $ × 40 × 52 = 45 760 $ par an avant impôts."],
+      ["Quelle différence entre une paie toutes les deux semaines et deux fois par mois ?", "Une paie toutes les deux semaines donne 26 versements par an. Une paie deux fois par mois donne 24 versements par an. Ce calculateur utilise la paie toutes les deux semaines (« biweekly »), très courante aux États-Unis."],
+      ["Pourquoi ma paie est-elle inférieure au salaire brut affiché ?", "Le salaire brut est calculé avant retenues. Votre employeur retient l'impôt fédéral sur le revenu, la Sécurité sociale et Medicare, et parfois les impôts de l'État et locaux, l'assurance ou la retraite. Votre salaire net est donc plus bas."],
+      ["Dois-je cocher l'option 1,5× pour les heures supplémentaires ?", "Cochez-la seulement si vos heures supplémentaires sont payées à 150 %. Beaucoup de salariés payés à l'heure et non exemptés reçoivent 1,5× au-delà de 40 heures par semaine, mais les salariés exemptés n'en reçoivent généralement pas et certains employeurs paient autrement. En cas de doute, demandez à votre employeur ou vérifiez votre fiche de paie."]
+    ]
+  },
+  {
+    "path": "salary-breakdown/",
+    "content": "salary-breakdown.html",
+    "app_name": "Calculateur de répartition du salaire",
+    "kind": "tool",
+    "title": "Répartition du salaire – Calculateur de budget mensuel gratuit | WorkHours",
+    "description": "Répartissez votre salaire mensuel entre loyer, alimentation, factures, épargne et plus. Voyez vos dépenses totales, le reste disponible, votre taux d'épargne et un graphique.",
+    "priority": "0.8",
+    "scripts": ["budget.js"],
+    "crumbs": [["Répartition du salaire", "salary-breakdown/"]],
+    "faq": [
+      ["Dois-je saisir mon salaire brut ou net ?", "Les deux fonctionnent. Le salaire net (ce qui arrive sur votre compte) est le plus simple. Si vous saisissez votre salaire brut, ajoutez vos impôts et autres retenues dans la catégorie Impôts pour que les totaux soient justes."],
+      ["Puis-je ajouter mes propres catégories ?", "Oui. Cliquez sur « Ajouter une catégorie », tapez un nom comme Garde d'enfants ou Remboursement de dettes, puis saisissez le montant. Vous pouvez aussi renommer ou supprimer n'importe quelle catégorie. Un budget peut contenir jusqu'à 20 catégories."],
+      ["Comment le taux d'épargne est-il calculé ?", "Le taux d'épargne est le montant de la catégorie Épargne divisé par votre revenu mensuel. Par exemple, 400 $ épargnés sur 4 000 $ de revenu donnent un taux de 10 %. L'argent restant non attribué est affiché séparément."],
+      ["Que se passe-t-il si mes dépenses dépassent mon revenu ?", "Un avertissement rouge « Budget dépassé » indique le montant du déficit mensuel, et le graphique montre la répartition de vos dépenses totales pour repérer les catégories à réduire."],
+      ["Mon budget est-il enregistré ?", "Votre budget est enregistré automatiquement dans votre navigateur, sur cet appareil, et il reste là si vous rechargez la page. Il n'est jamais envoyé ailleurs. Appuyez sur Réinitialiser pour l'effacer."]
+    ]
+  },
+  {
+    "path": "about/",
+    "content": "about.html",
+    "title": "À propos de WorkHours – Outils gratuits de temps de travail et de salaire",
+    "description": "WorkHours crée des calculateurs gratuits, privés et simples pour calculer les heures de travail, le salaire et le budget mensuel.",
+    "priority": "0.3",
+    "crumbs": [["À propos", "about/"]]
+  },
+  {
+    "path": "contact/",
+    "content": "contact.html",
+    "title": "Contact | WorkHours",
+    "description": "Contactez l'équipe WorkHours pour vos questions, remarques ou suggestions sur nos calculateurs gratuits.",
+    "priority": "0.2",
+    "scripts": ["contact.js"],
+    "crumbs": [["Contact", "contact/"]]
+  },
+  {
+    "path": "privacy-policy/",
+    "content": "privacy.html",
+    "title": "Politique de confidentialité | WorkHours",
+    "description": "Comment WorkHours traite vos informations : les calculs restent dans votre navigateur, usage du stockage local, cookies et publicité.",
+    "priority": "0.2",
+    "crumbs": [["Politique de confidentialité", "privacy-policy/"]]
+  },
+  {
+    "path": "terms-of-use/",
+    "content": "terms.html",
+    "title": "Conditions d'utilisation | WorkHours",
+    "description": "Les conditions qui s'appliquent à l'utilisation du site WorkHours et de ses calculateurs gratuits.",
+    "priority": "0.2",
+    "crumbs": [["Conditions d'utilisation", "terms-of-use/"]]
+  },
+  {
+    "path": "disclaimer/",
+    "content": "disclaimer.html",
+    "title": "Avertissement | WorkHours",
+    "description": "Les calculateurs WorkHours fournissent des estimations à titre informatif uniquement. Ce ne sont pas des conseils juridiques, fiscaux ou financiers.",
+    "priority": "0.2",
+    "crumbs": [["Avertissement", "disclaimer/"]]
+  }
+]

@@ -1,0 +1,116 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Calculateur d'heures de travail gratuit</h1>
+    <p class="lead">Calculez vos heures travaillées en quelques secondes. Indiquez quand vous avez commencé, quand vous avez fini et la durée de votre pause. Vous obtenez votre temps de travail net en heures et minutes et en heures décimales, même pour les postes de nuit qui dépassent minuit.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="wh-title">
+      <form id="wh-form" novalidate data-pay-url="{{root}}pay-calculator/">
+        <div class="calc-toolbar">
+          <h2 id="wh-title" style="margin:0">Votre poste de travail</h2>
+          <div class="segmented" role="radiogroup" aria-label="Format de l'heure">
+            <label><input type="radio" name="wh-format" value="24" checked><span>24 h</span></label>
+            <label><input type="radio" name="wh-format" value="12"><span>12 h (AM/PM)</span></label>
+          </div>
+        </div>
+
+        <div class="time-pair">
+          <div class="field" id="wh-start-field">
+            <label for="wh-start">Heure de début</label>
+            <div class="time-field">
+              <input id="wh-start" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="8:00" aria-describedby="wh-start-err">
+              <select class="input ampm" aria-label="Heure de début : AM ou PM"><option value="AM">AM</option><option value="PM">PM</option></select>
+            </div>
+            <span class="field-error" id="wh-start-err"></span>
+          </div>
+          <div class="field" id="wh-end-field">
+            <label for="wh-end">Heure de fin</label>
+            <div class="time-field">
+              <input id="wh-end" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="17:00" aria-describedby="wh-end-err">
+              <select class="input ampm" aria-label="Heure de fin : AM ou PM"><option value="AM">AM</option><option value="PM" selected>PM</option></select>
+            </div>
+            <span class="field-error" id="wh-end-err"></span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label for="wh-break">Durée de la pause (non payée)</label>
+          <div class="break-pair">
+            <input id="wh-break" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="wh-break-err wh-break-hint">
+            <select id="wh-break-unit" class="input" aria-label="Unité de la pause">
+              <option value="minutes" selected>minutes</option>
+              <option value="hours">heures</option>
+            </select>
+          </div>
+          <span class="hint" id="wh-break-hint">Laissez vide ou 0 si vous n'avez pas eu de pause non payée.</span>
+          <span class="field-error" id="wh-break-err"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Calculer</button>
+          <button type="reset" class="btn btn-outline btn-lg">Effacer</button>
+        </div>
+        <div id="wh-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="wh-results" aria-live="polite" aria-label="Résultats des heures de travail"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>Comment utiliser le calculateur d'heures</h2>
+      <ol>
+        <li>Saisissez votre <strong>heure de début</strong>, par exemple <em>8:00</em>.</li>
+        <li>Saisissez votre <strong>heure de fin</strong>, par exemple <em>17:00</em>.</li>
+        <li>Indiquez votre <strong>pause non payée</strong> en minutes ou en heures.</li>
+        <li>Appuyez sur <strong>Calculer</strong>. Si vous modifiez une valeur ensuite, les résultats se mettent à jour automatiquement.</li>
+      </ol>
+      <p>Vous préférez le format américain ? Choisissez <strong>12 h (AM/PM)</strong>, puis tapez par exemple <em>8:00</em> et sélectionnez AM ou PM. Vos saisies sont converties automatiquement.</p>
+
+      <h2>Comment les heures travaillées sont calculées</h2>
+      <p class="formula">Heures nettes travaillées = (Heure de fin &minus; Heure de début) &minus; Pause</p>
+      <div class="example">
+        <p><strong>Exemple :</strong> vous commencez à 8:00 et finissez à 17:00. Cela fait 9 heures entre le début et la fin. Après une pause déjeuner d'une heure, vous avez travaillé <strong>8 heures (8,00 heures décimales)</strong>.</p>
+      </div>
+
+      <h2>Les postes de nuit qui dépassent minuit</h2>
+      <p>Si votre heure de fin est plus tôt que votre heure de début, le calculateur comprend que votre poste s'est terminé le lendemain. Par exemple, de 22:00 à 6:30, cela fait 8 heures et 30 minutes. Aucune étape supplémentaire n'est nécessaire, et le résultat est signalé comme poste de nuit.</p>
+
+      <h2>Que sont les heures décimales ?</h2>
+      <p>Les logiciels de paie et les feuilles de temps enregistrent souvent le temps sous forme de nombre décimal pour pouvoir le multiplier par un taux horaire. Pour convertir, divisez les minutes par 60 et ajoutez-les aux heures :</p>
+      <table>
+        <thead><tr><th scope="col">Heures et minutes</th><th scope="col">Heures décimales</th></tr></thead>
+        <tbody>
+          <tr><td>7 h 15 min</td><td>7,25</td></tr>
+          <tr><td>7 h 30 min</td><td>7,50</td></tr>
+          <tr><td>7 h 45 min</td><td>7,75</td></tr>
+          <tr><td>8 h 20 min</td><td>8,33</td></tr>
+          <tr><td>8 h 40 min</td><td>8,67</td></tr>
+        </tbody>
+      </table>
+      <p>Une erreur courante consiste à écrire 7 h 30 comme 7,30. La bonne valeur décimale est 7,50. À 20 $ de l'heure, cette erreur vous coûterait 4,00 $ sur un seul poste.</p>
+
+      <h2>Quelles pauses faut-il déduire ?</h2>
+      <p>Ne déduisez que les pauses <strong>non payées</strong>, comme une pause repas de 30 minutes ou d'une heure pendant laquelle vous êtes entièrement libéré de vos fonctions. Selon les règles fédérales américaines, les courtes pauses (généralement de 5 à 20 minutes) sont en principe du temps de travail payé et ne doivent pas être déduites. Certains États ont leurs propres règles, et la politique de votre employeur peut être différente.</p>
+
+      <h2>Étape suivante : transformer les heures en salaire</h2>
+      <p>Une fois vos heures connues, utilisez le <a href="{{root}}pay-calculator/">calculateur de salaire</a> pour voir votre salaire brut par jour, semaine, deux semaines, mois ou année. Planifiez ensuite l'utilisation de cet argent avec l'outil <a href="{{root}}salary-breakdown/">Répartition du salaire</a>.</p>
+
+      <h2>Questions fréquentes</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Outils associés">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

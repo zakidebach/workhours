@@ -1,0 +1,116 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>حاسبة ساعات العمل المجانية</h1>
+    <p class="lead">احسب ساعات عملك في ثوانٍ. أدخل متى بدأت العمل ومتى انتهيت ومدة استراحتك، وستحصل على صافي وقت عملك بالساعات والدقائق وبالساعات العشرية، حتى في الورديات الليلية التي تتجاوز منتصف الليل.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="wh-title">
+      <form id="wh-form" novalidate data-pay-url="{{root}}pay-calculator/">
+        <div class="calc-toolbar">
+          <h2 id="wh-title" style="margin:0">أدخل ورديتك</h2>
+          <div class="segmented" role="radiogroup" aria-label="نظام الوقت">
+            <label><input type="radio" name="wh-format" value="12" checked><span>12 ساعة</span></label>
+            <label><input type="radio" name="wh-format" value="24"><span>24 ساعة</span></label>
+          </div>
+        </div>
+
+        <div class="time-pair">
+          <div class="field" id="wh-start-field">
+            <label for="wh-start">وقت بداية العمل</label>
+            <div class="time-field">
+              <input id="wh-start" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="8:00" aria-describedby="wh-start-err">
+              <select class="input ampm" aria-label="وقت البداية: صباحًا أو مساءً"><option value="AM">صباحًا</option><option value="PM">مساءً</option></select>
+            </div>
+            <span class="field-error" id="wh-start-err"></span>
+          </div>
+          <div class="field" id="wh-end-field">
+            <label for="wh-end">وقت نهاية العمل</label>
+            <div class="time-field">
+              <input id="wh-end" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="5:00" aria-describedby="wh-end-err">
+              <select class="input ampm" aria-label="وقت النهاية: صباحًا أو مساءً"><option value="AM">صباحًا</option><option value="PM" selected>مساءً</option></select>
+            </div>
+            <span class="field-error" id="wh-end-err"></span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label for="wh-break">مدة الاستراحة (غير المدفوعة)</label>
+          <div class="break-pair">
+            <input id="wh-break" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="wh-break-err wh-break-hint">
+            <select id="wh-break-unit" class="input" aria-label="وحدة الاستراحة">
+              <option value="minutes" selected>دقائق</option>
+              <option value="hours">ساعات</option>
+            </select>
+          </div>
+          <span class="hint" id="wh-break-hint">اتركها فارغة أو اكتب 0 إذا لم تكن لديك استراحة غير مدفوعة.</span>
+          <span class="field-error" id="wh-break-err"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">احسب</button>
+          <button type="reset" class="btn btn-outline btn-lg">مسح</button>
+        </div>
+        <div id="wh-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="wh-results" aria-live="polite" aria-label="نتائج ساعات العمل"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>كيف تستخدم حاسبة ساعات العمل</h2>
+      <ol>
+        <li>اكتب <strong>وقت البداية</strong>، مثل <em>8:00</em>، واختر صباحًا أو مساءً. يمكنك أيضًا كتابة <em>8a</em> أو <em>8:00 am</em>.</li>
+        <li>اكتب <strong>وقت النهاية</strong>، مثل <em>5:00</em> مساءً.</li>
+        <li>أدخل مدة <strong>الاستراحة غير المدفوعة</strong> بالدقائق أو بالساعات.</li>
+        <li>اضغط <strong>احسب</strong>. إذا غيّرت أي قيمة بعد ذلك تتحدث النتائج تلقائيًا.</li>
+      </ol>
+      <p>تفضّل نظام 24 ساعة؟ اختر <strong>24 ساعة</strong> واكتب أوقاتًا مثل <em>06:30</em> أو <em>18:00</em>. تُحوَّل القيم التي أدخلتها تلقائيًا.</p>
+
+      <h2>كيف تُحسب ساعات العمل</h2>
+      <p class="formula">صافي ساعات العمل = (وقت النهاية &minus; وقت البداية) &minus; الاستراحة</p>
+      <div class="example">
+        <p><strong>مثال:</strong> بدأت العمل الساعة 8:00 صباحًا وانتهيت الساعة 5:00 مساءً، أي 9 ساعات من البداية إلى النهاية. بعد طرح استراحة غداء مدتها ساعة واحدة، تكون قد عملت <strong>8 ساعات (8.00 ساعات عشرية)</strong>.</p>
+      </div>
+
+      <h2>الورديات الليلية التي تتجاوز منتصف الليل</h2>
+      <p>إذا كان وقت النهاية أبكر من وقت البداية، تفهم الحاسبة أن ورديتك انتهت في اليوم التالي. مثلًا من 10:00 مساءً إلى 6:30 صباحًا تساوي 8 ساعات و30 دقيقة. لا تحتاج إلى أي خطوة إضافية، وتظهر النتيجة مع علامة «وردية ليلية».</p>
+
+      <h2>ما هي الساعات العشرية؟</h2>
+      <p>تسجّل أنظمة الرواتب وجداول الدوام الوقتَ عادةً كرقم عشري حتى يمكن ضربه في الأجر بالساعة. للتحويل، اقسم الدقائق على 60 وأضفها إلى الساعات:</p>
+      <table>
+        <thead><tr><th scope="col">الساعات والدقائق</th><th scope="col">الساعات العشرية</th></tr></thead>
+        <tbody>
+          <tr><td>7 ساعات و15 دقيقة</td><td>7.25</td></tr>
+          <tr><td>7 ساعات و30 دقيقة</td><td>7.50</td></tr>
+          <tr><td>7 ساعات و45 دقيقة</td><td>7.75</td></tr>
+          <tr><td>8 ساعات و20 دقيقة</td><td>8.33</td></tr>
+          <tr><td>8 ساعات و40 دقيقة</td><td>8.67</td></tr>
+        </tbody>
+      </table>
+      <p>من الأخطاء الشائعة كتابة 7 ساعات و30 دقيقة على أنها 7.30، والقيمة العشرية الصحيحة هي 7.50. بأجر 20$ للساعة، يكلّفك هذا الخطأ 4.00$ في وردية واحدة.</p>
+
+      <h2>ما الاستراحات التي يجب طرحها؟</h2>
+      <p>اطرح الاستراحات <strong>غير المدفوعة</strong> فقط، مثل استراحة الوجبة لمدة 30 دقيقة أو ساعة التي تكون خلالها معفيًا تمامًا من العمل. وفق القواعد الفيدرالية الأمريكية، تُعد الاستراحات القصيرة (عادةً من 5 إلى 20 دقيقة) وقت عمل مدفوعًا، فلا تطرحها. لبعض الولايات قواعدها الخاصة، وقد تختلف سياسة صاحب العمل.</p>
+
+      <h2>الخطوة التالية: حوّل الساعات إلى أجر</h2>
+      <p>بعد معرفة ساعاتك، استخدم <a href="{{root}}pay-calculator/">حاسبة الأجر</a> لمعرفة أجرك الإجمالي في اليوم أو الأسبوع أو كل أسبوعين أو الشهر أو السنة، ثم خطّط لاستخدام هذا المال بأداة <a href="{{root}}salary-breakdown/">تقسيم الراتب</a>.</p>
+
+      <h2>الأسئلة الشائعة</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="أدوات ذات صلة">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

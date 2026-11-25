@@ -1,0 +1,45 @@
+<div class="container container-narrow content">
+  <article class="prose" style="max-width:none">
+    <h1>Contact Us</h1>
+    <p>Questions, feedback, a calculation you think is wrong, or an idea for a new tool? We'd like to hear from you. We read every message and aim to reply within a few business days.</p>
+    <p>Email: <a href="mailto:{{email}}">{{email}}</a></p>
+  </article>
+
+  <section class="card" style="margin-top:12px" aria-labelledby="cf-title">
+    <h2 id="cf-title" style="font-size:1.25rem">Send us a message</h2>
+    <p style="color:var(--gray-600);font-size:.95rem">This form opens a pre-filled email in your own email app. Nothing is sent until you press Send there, and no data is stored on this website.</p>
+    <form id="contact-form" data-email="{{email}}" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" class="input" type="text" autocomplete="name" maxlength="80" aria-describedby="cf-name-err" required>
+          <span class="field-error" id="cf-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="cf-topic">Topic</label>
+          <select id="cf-topic" class="input">
+            <option>General question</option>
+            <option>Report a calculation issue</option>
+            <option>Feature suggestion</option>
+            <option>Advertising or partnership</option>
+            <option>Privacy request</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" class="input" rows="6" maxlength="3000" aria-describedby="cf-message-err cf-message-hint" required style="resize:vertical"></textarea>
+          <span class="hint" id="cf-message-hint">Please don't include sensitive personal or financial information.</span>
+          <span class="field-error" id="cf-message-err"></span>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-green">Open email to send</button>
+      </div>
+      <div id="cf-status" class="form-status" role="status"></div>
+    </form>
+  </section>
+
+  <div class="notice" style="margin-top:24px">
+    <p><strong>Please note:</strong> we can't give individual legal, tax or payroll advice. For questions about your specific situation, contact your employer's HR or payroll team, the U.S. Department of Labor's Wage and Hour Division, your state labor department, or a qualified professional.</p>
+  </div>
+</div>

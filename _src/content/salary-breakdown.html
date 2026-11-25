@@ -1,0 +1,92 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Salary Breakdown &amp; Monthly Budget Calculator</h1>
+    <p class="lead">See where your paycheck goes. Enter your monthly salary and what you spend on rent, food, bills and more. You'll instantly see your total expenses, what's left over, your savings rate and a chart of your budget.</p>
+  </header>
+
+  <div class="calc-layout" id="budget">
+    <section class="card calc-panel" aria-labelledby="bd-title">
+      <h2 id="bd-title">Your monthly budget</h2>
+      <div class="field">
+        <label for="bd-income">Monthly Salary / Income</label>
+        <div class="input-prefix"><span>$</span><input id="bd-income" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="4,000.00" aria-describedby="bd-income-err bd-income-hint"></div>
+        <span class="hint" id="bd-income-hint">Use your take-home pay, or your gross pay plus a Taxes amount below.</span>
+        <span class="field-error" id="bd-income-err"></span>
+      </div>
+
+      <div style="margin-top:22px">
+        <div class="bd-head" aria-hidden="true"><span></span><span>Category</span><span>Amount / month</span><span>% of pay</span><span></span></div>
+        <div id="bd-list"></div>
+      </div>
+
+      <div class="btn-row bd-add-row" style="margin-top:12px">
+        <button type="button" class="btn btn-outline" id="bd-add">+ Add category</button>
+        <button type="button" class="btn btn-ghost" id="bd-add-savings" hidden>+ Add savings</button>
+      </div>
+      <div id="bd-status" class="form-status" role="alert"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-print>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / Save as PDF</button>
+        <button type="button" class="btn btn-outline btn-lg" id="bd-reset">Reset</button>
+      </div>
+      <p class="hint no-print" style="font-size:.85rem;color:var(--gray-500);margin:12px 0 0">Results update as you type. Your budget is saved only in this browser, on this device.</p>
+    </section>
+
+    <aside class="card results" id="bd-results" aria-live="polite" aria-label="Budget results"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>How to use the salary breakdown calculator</h2>
+      <ol>
+        <li>Enter your <strong>monthly income</strong>. If you're paid weekly, multiply your weekly pay by 52 and divide by 12. If you're paid every two weeks, multiply by 26 and divide by 12.</li>
+        <li>Type what you spend each month in each category. Leave a category blank if it doesn't apply.</li>
+        <li><strong>Rename</strong> any category by typing over its name, <strong>delete</strong> ones you don't need with the &times; button, and <strong>add</strong> your own, such as Childcare, Debt Payments or Pets.</li>
+        <li>Review your <strong>left-over amount</strong>, <strong>savings rate</strong> and the chart. If your spending is more than your income, you'll see a clear warning.</li>
+        <li>Print your budget or save it as a PDF to keep a copy.</li>
+      </ol>
+
+      <h2>How the numbers are calculated</h2>
+      <p class="formula">Total expenses = sum of all categories except Savings<br>Left over = Income &minus; Total expenses &minus; Savings<br>Category share = Category amount &divide; Income &times; 100<br>Savings rate = Savings &divide; Income &times; 100</p>
+      <div class="example">
+        <p><strong>Example:</strong> Monthly income of $4,000 with $1,400 for rent, $500 for food, $300 for transportation, $250 for bills and $400 for savings. Total expenses are $2,450 (about 61% of income). Savings are $400, a 10% savings rate. Left over: <strong>$1,150</strong>.</p>
+      </div>
+
+      <h2>A simple way to plan: the 50/30/20 guideline</h2>
+      <p>If you're not sure where to start, many people use the 50/30/20 rule of thumb as a starting point:</p>
+      <ul>
+        <li><strong>About 50% for needs:</strong> housing, groceries, utilities, transportation, insurance and minimum debt payments.</li>
+        <li><strong>About 30% for wants:</strong> dining out, shopping, entertainment and subscriptions.</li>
+        <li><strong>About 20% for savings and extra debt payments:</strong> emergency fund, retirement and paying down balances faster.</li>
+      </ul>
+      <p>It's a guideline, not a rule. In high-cost areas, housing alone can take more than a third of income. The point is to see your own numbers clearly, then adjust.</p>
+
+      <h2>Tips for a budget that works</h2>
+      <ul>
+        <li><strong>Use real numbers.</strong> Check last month's bank and card statements instead of guessing.</li>
+        <li><strong>Pay yourself first.</strong> Treat savings like a bill so it doesn't get squeezed out.</li>
+        <li><strong>Plan for irregular costs.</strong> Divide yearly expenses, such as car registration or holiday gifts, by 12 and add them as a category.</li>
+        <li><strong>Review monthly.</strong> Update the amounts when your pay or bills change.</li>
+      </ul>
+
+      <h2>Your financial data stays private</h2>
+      <p>This tool runs entirely in your browser. Your salary and expenses are never sent to WorkHours or anyone else. They are saved only in your browser's local storage on this device, so your budget is still here if you refresh the page. Press <strong>Reset</strong> to erase it, especially on a shared computer.</p>
+
+      <h2>Frequently asked questions</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Related tools">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

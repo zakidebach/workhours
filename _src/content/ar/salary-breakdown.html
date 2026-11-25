@@ -1,0 +1,92 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>تقسيم الراتب وحاسبة الميزانية الشهرية</h1>
+    <p class="lead">اعرف أين يذهب راتبك. أدخل راتبك الشهري وما تنفقه على الإيجار والطعام والفواتير وغيرها، وسترى فورًا إجمالي مصاريفك والمبلغ المتبقي ونسبة ادخارك ورسمًا بيانيًا لميزانيتك.</p>
+  </header>
+
+  <div class="calc-layout" id="budget">
+    <section class="card calc-panel" aria-labelledby="bd-title">
+      <h2 id="bd-title">ميزانيتك الشهرية</h2>
+      <div class="field">
+        <label for="bd-income">الراتب / الدخل الشهري</label>
+        <div class="input-prefix"><span>$</span><input id="bd-income" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="4,000.00" aria-describedby="bd-income-err bd-income-hint"></div>
+        <span class="hint" id="bd-income-hint">استخدم راتبك الصافي، أو راتبك الإجمالي مع إضافة مبلغ في فئة الضرائب أدناه.</span>
+        <span class="field-error" id="bd-income-err"></span>
+      </div>
+
+      <div style="margin-top:22px">
+        <div class="bd-head" aria-hidden="true"><span></span><span>الفئة</span><span>المبلغ / شهريًا</span><span>% من الراتب</span><span></span></div>
+        <div id="bd-list"></div>
+      </div>
+
+      <div class="btn-row bd-add-row" style="margin-top:12px">
+        <button type="button" class="btn btn-outline" id="bd-add">+ إضافة فئة</button>
+        <button type="button" class="btn btn-ghost" id="bd-add-savings" hidden>+ إضافة الادخار</button>
+      </div>
+      <div id="bd-status" class="form-status" role="alert"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-print>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          طباعة / حفظ PDF</button>
+        <button type="button" class="btn btn-outline btn-lg" id="bd-reset">إعادة الضبط</button>
+      </div>
+      <p class="hint no-print" style="font-size:.85rem;color:var(--gray-500);margin:12px 0 0">تتحدث النتائج أثناء الكتابة. تُحفظ ميزانيتك في هذا المتصفح فقط وعلى هذا الجهاز.</p>
+    </section>
+
+    <aside class="card results" id="bd-results" aria-live="polite" aria-label="نتائج الميزانية"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>كيف تستخدم أداة تقسيم الراتب</h2>
+      <ol>
+        <li>أدخل <strong>دخلك الشهري</strong>. إذا كنت تتقاضى أجرك أسبوعيًا، فاضرب أجرك الأسبوعي في 52 ثم اقسم على 12. وإذا كنت تتقاضاه كل أسبوعين، فاضربه في 26 ثم اقسم على 12.</li>
+        <li>اكتب ما تنفقه شهريًا في كل فئة. اترك الفئة فارغة إذا كانت لا تخصك.</li>
+        <li><strong>أعد تسمية</strong> أي فئة بالكتابة فوق اسمها، و<strong>احذف</strong> ما لا تحتاجه بزر &times;، و<strong>أضف</strong> فئاتك الخاصة مثل رعاية الأطفال أو سداد الديون أو الحيوانات الأليفة.</li>
+        <li>راجع <strong>المبلغ المتبقي</strong> و<strong>نسبة الادخار</strong> والرسم البياني. إذا كانت مصاريفك أكبر من دخلك فسيظهر تنبيه واضح.</li>
+        <li>اطبع ميزانيتك أو احفظها PDF للاحتفاظ بنسخة.</li>
+      </ol>
+
+      <h2>كيف تُحسب الأرقام</h2>
+      <p class="formula">إجمالي المصاريف = مجموع كل الفئات ما عدا الادخار<br>المبلغ المتبقي = الدخل &minus; المصاريف &minus; الادخار<br>نسبة الفئة = مبلغ الفئة &divide; الدخل &times; 100<br>نسبة الادخار = الادخار &divide; الدخل &times; 100</p>
+      <div class="example">
+        <p><strong>مثال:</strong> دخل شهري قدره 4,000$، منه 1,400$ للإيجار و500$ للطعام و300$ للنقل و250$ للفواتير و400$ للادخار. إجمالي المصاريف 2,450$ (نحو 61% من الدخل). الادخار 400$، أي نسبة ادخار 10%. المبلغ المتبقي: <strong>1,150$</strong>.</p>
+      </div>
+
+      <h2>طريقة بسيطة للبدء: قاعدة 50/30/20</h2>
+      <p>إذا لم تكن متأكدًا من أين تبدأ، يستخدم كثير من الناس قاعدة 50/30/20 كنقطة انطلاق:</p>
+      <ul>
+        <li><strong>نحو 50% للاحتياجات:</strong> السكن والبقالة والخدمات والنقل والتأمين والحد الأدنى لأقساط الديون.</li>
+        <li><strong>نحو 30% للرغبات:</strong> المطاعم والتسوق والترفيه والاشتراكات.</li>
+        <li><strong>نحو 20% للادخار والسداد الإضافي للديون:</strong> صندوق الطوارئ والتقاعد وتسديد الأرصدة بشكل أسرع.</li>
+      </ul>
+      <p>إنها إرشاد عام وليست قاعدة ملزمة. في المناطق مرتفعة التكلفة قد يستهلك السكن وحده أكثر من ثلث الدخل. الأهم أن ترى أرقامك بوضوح ثم تعدّلها.</p>
+
+      <h2>نصائح لميزانية ناجحة</h2>
+      <ul>
+        <li><strong>استخدم أرقامًا حقيقية.</strong> راجع كشوف حسابك البنكي للشهر الماضي بدل التخمين.</li>
+        <li><strong>ادفع لنفسك أولًا.</strong> تعامل مع الادخار كفاتورة حتى لا يضيع.</li>
+        <li><strong>خطّط للمصاريف غير المنتظمة.</strong> اقسم المصاريف السنوية، مثل تسجيل السيارة أو الهدايا، على 12 وأضفها كفئة.</li>
+        <li><strong>راجع ميزانيتك كل شهر.</strong> حدّث المبالغ عندما يتغير راتبك أو فواتيرك.</li>
+      </ul>
+
+      <h2>بياناتك المالية تبقى خاصة</h2>
+      <p>تعمل هذه الأداة بالكامل داخل متصفحك. لا يُرسل راتبك أو مصاريفك إلى WorkHours أو إلى أي جهة أخرى، بل تُحفظ فقط في التخزين المحلي لمتصفحك على هذا الجهاز حتى تبقى ميزانيتك موجودة إذا حدّثت الصفحة. اضغط <strong>إعادة الضبط</strong> لحذفها، خاصة على جهاز مشترك.</p>
+
+      <h2>الأسئلة الشائعة</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="أدوات ذات صلة">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

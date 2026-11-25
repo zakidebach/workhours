@@ -1,0 +1,110 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Hourly Pay Calculator</h1>
+    <p class="lead">Find your gross pay from your hourly rate and the hours you work. Choose daily, weekly, biweekly, monthly or annual pay, add overtime if you have it, and see exactly how the total was calculated.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="pay-title">
+      <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
+        <h2 id="pay-title">Your rate &amp; hours</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="pay-rate">Hourly Rate</label>
+            <div class="input-prefix"><span>$</span><input id="pay-rate" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20.00" aria-describedby="pay-rate-err"></div>
+            <span class="field-error" id="pay-rate-err"></span>
+          </div>
+          <div class="field">
+            <label for="pay-period">Pay Period</label>
+            <select id="pay-period" class="input">
+              <option value="daily">Daily</option>
+              <option value="weekly" selected>Weekly</option>
+              <option value="biweekly">Biweekly (every 2 weeks)</option>
+              <option value="monthly">Monthly</option>
+              <option value="annually">Annually</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="pay-hours" id="pay-hours-label">Regular hours worked per week</label>
+            <div class="input-suffix"><input id="pay-hours" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="40" aria-describedby="pay-hours-err pay-hours-hint"><span>hrs</span></div>
+            <span class="hint" id="pay-hours-hint">Use decimal hours: 7 hrs 30 min = 7.5. Not sure? Use the <a href="{{root}}work-hours-calculator/">Work Hours Calculator</a>.</span>
+            <span class="field-error" id="pay-hours-err"></span>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-200)">
+          <label class="check"><input type="checkbox" id="pay-ot-on"> <span>Add overtime hours</span></label>
+        </div>
+        <div id="pay-ot-group" hidden>
+          <div class="form-grid" style="margin-top:14px">
+            <div class="field">
+              <label for="pay-ot" id="pay-ot-label">Overtime hours per week</label>
+              <div class="input-suffix"><input id="pay-ot" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="pay-ot-err"><span>hrs</span></div>
+              <span class="field-error" id="pay-ot-err"></span>
+            </div>
+          </div>
+          <label class="check" style="margin-top:14px"><input type="checkbox" id="pay-ot-15"> <span>Pay overtime at 1.5&times; (time and a half)<br><small style="font-weight:500;color:var(--gray-500)">If unchecked, overtime hours are paid at your regular rate.</small></span></label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Calculate pay</button>
+          <button type="reset" class="btn btn-outline btn-lg">Clear</button>
+        </div>
+        <div id="pay-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="pay-results" aria-live="polite" aria-label="Pay results"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>How to calculate your pay</h2>
+      <p>Your gross pay is what you earn before taxes and other deductions. For hourly work, the formula is simple:</p>
+      <p class="formula">Gross pay = Hourly rate &times; Hours worked<br>+ Overtime hours &times; Overtime rate (if any)</p>
+      <div class="example">
+        <p><strong>Example:</strong> You earn $20.00 an hour and work 40 regular hours plus 5 overtime hours in a week. Regular pay is 40 &times; $20.00 = $800.00. At time and a half, the overtime rate is $30.00, so overtime pay is 5 &times; $30.00 = $150.00. Gross weekly pay: <strong>$950.00</strong>.</p>
+      </div>
+
+      <h2>Understanding pay periods</h2>
+      <table>
+        <thead><tr><th scope="col">Pay period</th><th scope="col">Paychecks per year</th><th scope="col">$20/hr, 40 hrs/week</th></tr></thead>
+        <tbody>
+          <tr><td>Daily (8 hrs)</td><td>260 workdays</td><td>$160.00</td></tr>
+          <tr><td>Weekly</td><td>52</td><td>$800.00</td></tr>
+          <tr><td>Biweekly</td><td>26</td><td>$1,600.00</td></tr>
+          <tr><td>Monthly</td><td>12</td><td>$3,466.67</td></tr>
+          <tr><td>Annually</td><td>1</td><td>$41,600.00</td></tr>
+        </tbody>
+      </table>
+      <p>Monthly pay is not simply four weeks of pay. A year has 52 weeks, so an average month has about 4.33 weeks. Multiplying weekly pay by 4 understates your monthly income by roughly 8%.</p>
+
+      <h2>About overtime</h2>
+      <p>Under the federal Fair Labor Standards Act (FLSA), most hourly employees who are <strong>non-exempt</strong> must be paid at least 1.5 times their regular rate for hours worked over 40 in a workweek. However, the rule does not apply to everyone:</p>
+      <ul>
+        <li>Some employees are <strong>exempt</strong> from overtime, such as many salaried managers and professionals who meet specific tests.</li>
+        <li>Federal law looks at the <strong>workweek</strong>, not the day. Working more than 8 hours in one day does not by itself require overtime under federal law.</li>
+        <li><strong>State laws</strong> can be more generous. California, for example, requires daily overtime in many cases.</li>
+        <li>Your <strong>employer or contract</strong> may pay overtime differently.</li>
+      </ul>
+      <p>That's why the 1.5&times; option is off by default. Turn it on only if it matches your situation, and treat the result as an estimate.</p>
+
+      <h2>Gross pay vs. take-home pay</h2>
+      <p>This calculator shows <strong>gross pay</strong> only. It does not subtract federal, state or local taxes, Social Security, Medicare, insurance or retirement contributions, because those depend on your personal situation. Your paycheck will be lower than the gross amount. To plan your monthly spending, enter your take-home pay in the <a href="{{root}}salary-breakdown/">Salary Breakdown</a> tool, or enter your gross pay and add your taxes as a category.</p>
+
+      <h2>Frequently asked questions</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Related tools">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

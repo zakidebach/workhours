@@ -1,0 +1,92 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Répartition du salaire et calculateur de budget mensuel</h1>
+    <p class="lead">Voyez où va votre salaire. Saisissez votre salaire mensuel et ce que vous dépensez en loyer, alimentation, factures et plus. Vous voyez aussitôt vos dépenses totales, le reste disponible, votre taux d'épargne et un graphique de votre budget.</p>
+  </header>
+
+  <div class="calc-layout" id="budget">
+    <section class="card calc-panel" aria-labelledby="bd-title">
+      <h2 id="bd-title">Votre budget mensuel</h2>
+      <div class="field">
+        <label for="bd-income">Salaire / revenu mensuel</label>
+        <div class="input-prefix"><span>$</span><input id="bd-income" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="4 000,00" aria-describedby="bd-income-err bd-income-hint"></div>
+        <span class="hint" id="bd-income-hint">Utilisez votre salaire net, ou votre salaire brut en ajoutant un montant dans la catégorie Impôts ci-dessous.</span>
+        <span class="field-error" id="bd-income-err"></span>
+      </div>
+
+      <div style="margin-top:22px">
+        <div class="bd-head" aria-hidden="true"><span></span><span>Catégorie</span><span>Montant / mois</span><span>% du salaire</span><span></span></div>
+        <div id="bd-list"></div>
+      </div>
+
+      <div class="btn-row bd-add-row" style="margin-top:12px">
+        <button type="button" class="btn btn-outline" id="bd-add">+ Ajouter une catégorie</button>
+        <button type="button" class="btn btn-ghost" id="bd-add-savings" hidden>+ Ajouter l'épargne</button>
+      </div>
+      <div id="bd-status" class="form-status" role="alert"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-print>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Imprimer / Enregistrer en PDF</button>
+        <button type="button" class="btn btn-outline btn-lg" id="bd-reset">Réinitialiser</button>
+      </div>
+      <p class="hint no-print" style="font-size:.85rem;color:var(--gray-500);margin:12px 0 0">Les résultats se mettent à jour pendant la saisie. Votre budget est enregistré uniquement dans ce navigateur, sur cet appareil.</p>
+    </section>
+
+    <aside class="card results" id="bd-results" aria-live="polite" aria-label="Résultats du budget"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>Comment utiliser le calculateur de répartition du salaire</h2>
+      <ol>
+        <li>Saisissez votre <strong>revenu mensuel</strong>. Si vous êtes payé chaque semaine, multipliez votre salaire hebdomadaire par 52 puis divisez par 12. Si vous êtes payé toutes les deux semaines, multipliez par 26 puis divisez par 12.</li>
+        <li>Indiquez ce que vous dépensez chaque mois dans chaque catégorie. Laissez une catégorie vide si elle ne vous concerne pas.</li>
+        <li><strong>Renommez</strong> une catégorie en tapant sur son nom, <strong>supprimez</strong> celles dont vous n'avez pas besoin avec le bouton &times;, et <strong>ajoutez</strong> les vôtres, comme Garde d'enfants, Dettes ou Animaux.</li>
+        <li>Consultez le <strong>reste disponible</strong>, votre <strong>taux d'épargne</strong> et le graphique. Si vos dépenses dépassent votre revenu, un avertissement clair s'affiche.</li>
+        <li>Imprimez votre budget ou enregistrez-le en PDF pour en garder une copie.</li>
+      </ol>
+
+      <h2>Comment les chiffres sont calculés</h2>
+      <p class="formula">Total des dépenses = somme de toutes les catégories sauf l'Épargne<br>Reste disponible = Revenu &minus; Dépenses &minus; Épargne<br>Part d'une catégorie = Montant &divide; Revenu &times; 100<br>Taux d'épargne = Épargne &divide; Revenu &times; 100</p>
+      <div class="example">
+        <p><strong>Exemple :</strong> revenu mensuel de 4 000 $ avec 1 400 $ de loyer, 500 $ d'alimentation, 300 $ de transport, 250 $ de factures et 400 $ d'épargne. Le total des dépenses est de 2 450 $ (environ 61 % du revenu). L'épargne est de 400 $, soit un taux d'épargne de 10 %. Reste disponible : <strong>1 150 $</strong>.</p>
+      </div>
+
+      <h2>Une méthode simple pour démarrer : la règle 50/30/20</h2>
+      <p>Si vous ne savez pas par où commencer, beaucoup de gens utilisent la règle 50/30/20 comme point de départ :</p>
+      <ul>
+        <li><strong>Environ 50 % pour les besoins :</strong> logement, courses, énergie, transport, assurances et remboursements minimaux de dettes.</li>
+        <li><strong>Environ 30 % pour les envies :</strong> restaurants, achats, loisirs et abonnements.</li>
+        <li><strong>Environ 20 % pour l'épargne et le remboursement anticipé de dettes :</strong> fonds d'urgence, retraite et réduction plus rapide des soldes.</li>
+      </ul>
+      <p>C'est un repère, pas une règle. Dans les régions chères, le logement seul peut dépasser un tiers du revenu. L'essentiel est de voir clairement vos propres chiffres, puis de les ajuster.</p>
+
+      <h2>Conseils pour un budget qui fonctionne</h2>
+      <ul>
+        <li><strong>Utilisez des chiffres réels.</strong> Consultez vos relevés bancaires du mois dernier au lieu de deviner.</li>
+        <li><strong>Payez-vous en premier.</strong> Traitez l'épargne comme une facture pour qu'elle ne passe pas à la trappe.</li>
+        <li><strong>Prévoyez les dépenses irrégulières.</strong> Divisez les dépenses annuelles, comme l'assurance auto ou les cadeaux, par 12 et ajoutez-les comme catégorie.</li>
+        <li><strong>Faites le point chaque mois.</strong> Mettez à jour les montants quand votre salaire ou vos factures changent.</li>
+      </ul>
+
+      <h2>Vos données financières restent privées</h2>
+      <p>Cet outil fonctionne entièrement dans votre navigateur. Votre salaire et vos dépenses ne sont jamais envoyés à WorkHours ni à personne d'autre. Ils sont enregistrés uniquement dans le stockage local de votre navigateur, sur cet appareil, pour que votre budget soit toujours là si vous rechargez la page. Appuyez sur <strong>Réinitialiser</strong> pour l'effacer, surtout sur un ordinateur partagé.</p>
+
+      <h2>Questions fréquentes</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Outils associés">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

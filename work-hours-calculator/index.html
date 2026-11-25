@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Work Hours Calculator – Calculate Hours Worked | WorkHours</title>
+<meta name="description" content="Free work hours calculator: enter start time, end time and break to calculate hours worked in hours, minutes and decimal hours. Supports overnight shifts.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://zakidebach.github.io/workhours/work-hours-calculator/">
+<link rel="alternate" hreflang="en" href="https://zakidebach.github.io/workhours/work-hours-calculator/">
+<link rel="alternate" hreflang="fr" href="https://zakidebach.github.io/workhours/fr/work-hours-calculator/">
+<link rel="alternate" hreflang="ar" href="https://zakidebach.github.io/workhours/ar/work-hours-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://zakidebach.github.io/workhours/work-hours-calculator/">
+<meta name="theme-color" content="#0f2b52">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WorkHours">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:title" content="Free Work Hours Calculator – Calculate Hours Worked | WorkHours">
+<meta property="og:description" content="Free work hours calculator: enter start time, end time and break to calculate hours worked in hours, minutes and decimal hours. Supports overnight shifts.">
+<meta property="og:url" content="https://zakidebach.github.io/workhours/work-hours-calculator/">
+<meta property="og:image" content="https://zakidebach.github.io/workhours/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="WorkHours: free work hours, pay and budget calculators">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Work Hours Calculator – Calculate Hours Worked | WorkHours">
+<meta name="twitter:description" content="Free work hours calculator: enter start time, end time and break to calculate hours worked in hours, minutes and decimal hours. Supports overnight shifts.">
+<meta name="twitter:image" content="https://zakidebach.github.io/workhours/assets/img/og-image.png">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../assets/css/style.css">
+<!-- Google AdSense: after approval, paste the AdSense <script> tag from your AdSense account here. -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zakidebach.github.io/workhours/"},{"@type":"ListItem","position":2,"name":"Work Hours Calculator","item":"https://zakidebach.github.io/workhours/work-hours-calculator/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Work Hours Calculator","url":"https://zakidebach.github.io/workhours/work-hours-calculator/","description":"Free work hours calculator: enter start time, end time and break to calculate hours worked in hours, minutes and decimal hours. Supports overnight shifts.","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"inLanguage":"en-US","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"WorkHours","url":"https://zakidebach.github.io/workhours/","logo":"https://zakidebach.github.io/workhours/assets/img/icon-512.png"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en-US","mainEntity":[{"@type":"Question","name":"How do I calculate hours worked for an overnight shift?","acceptedAnswer":{"@type":"Answer","text":"Just enter the real start and end times, such as 10:00 PM and 6:30 AM. Because the end time is earlier than the start time, the calculator knows the shift ended the next day and returns 8 hours 30 minutes."}},{"@type":"Question","name":"How do I enter a 1-hour break?","acceptedAnswer":{"@type":"Answer","text":"Type 1 and choose hours from the menu next to the break field, or type 60 and keep minutes selected. Both give the same result."}},{"@type":"Question","name":"What's the difference between total time and net hours?","acceptedAnswer":{"@type":"Answer","text":"Total time is everything from your start time to your end time. Net hours worked is total time minus your unpaid break, which is the time you are normally paid for."}},{"@type":"Question","name":"How do I convert minutes to decimal hours?","acceptedAnswer":{"@type":"Answer","text":"Divide the minutes by 60. For example, 45 minutes is 0.75 hours, so 7 hours 45 minutes is 7.75 decimal hours. The calculator shows both formats."}}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../" aria-label="WorkHours home"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0f2b52"/><circle cx="20" cy="21" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M20 15v6.5l4.5 3" fill="none" stroke="#5fd3a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 6h8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Work<b>Hours</b></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="main-nav" class="main-nav" aria-label="Main">
+      <ul><li><a href="../work-hours-calculator/" aria-current="page">Work Hours</a></li><li><a href="../pay-calculator/">Pay Calculator</a></li><li><a href="../salary-breakdown/">Salary Breakdown</a></li><li><a href="../about/">About Us</a></li><li class="lang-item"><div class="lang-switch" role="group" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><a href="../work-hours-calculator/" hreflang="en" lang="en" aria-current="true">English</a><a href="../fr/work-hours-calculator/" hreflang="fr" lang="fr">Français</a><a href="../ar/work-hours-calculator/" hreflang="ar" lang="ar">العربية</a></div></li></ul>
+    </nav>
+  </div>
+</header>
+<nav class="breadcrumbs container" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Work Hours Calculator</li></ol></nav>
+<main id="main">
+<div class="container">
+  <header class="page-hero">
+    <h1>Free Work Hours Calculator</h1>
+    <p class="lead">Calculate hours worked in seconds. Enter when you started, when you finished and how long your break was. You'll get your net work time in hours and minutes and in decimal hours, even for night shifts that run past midnight.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="wh-title">
+      <form id="wh-form" novalidate data-pay-url="../pay-calculator/">
+        <div class="calc-toolbar">
+          <h2 id="wh-title" style="margin:0">Enter your shift</h2>
+          <div class="segmented" role="radiogroup" aria-label="Time format">
+            <label><input type="radio" name="wh-format" value="12" checked><span>12-hour</span></label>
+            <label><input type="radio" name="wh-format" value="24"><span>24-hour</span></label>
+          </div>
+        </div>
+
+        <div class="time-pair">
+          <div class="field" id="wh-start-field">
+            <label for="wh-start">Start Time</label>
+            <div class="time-field">
+              <input id="wh-start" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="8:00" aria-describedby="wh-start-err">
+              <select class="input ampm" aria-label="Start time AM or PM"><option value="AM">AM</option><option value="PM">PM</option></select>
+            </div>
+            <span class="field-error" id="wh-start-err"></span>
+          </div>
+          <div class="field" id="wh-end-field">
+            <label for="wh-end">End Time</label>
+            <div class="time-field">
+              <input id="wh-end" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="5:00" aria-describedby="wh-end-err">
+              <select class="input ampm" aria-label="End time AM or PM"><option value="AM">AM</option><option value="PM" selected>PM</option></select>
+            </div>
+            <span class="field-error" id="wh-end-err"></span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label for="wh-break">Break Duration (unpaid)</label>
+          <div class="break-pair">
+            <input id="wh-break" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="wh-break-err wh-break-hint">
+            <select id="wh-break-unit" class="input" aria-label="Break unit">
+              <option value="minutes" selected>minutes</option>
+              <option value="hours">hours</option>
+            </select>
+          </div>
+          <span class="hint" id="wh-break-hint">Leave blank or 0 if you had no unpaid break.</span>
+          <span class="field-error" id="wh-break-err"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Calculate</button>
+          <button type="reset" class="btn btn-outline btn-lg">Clear</button>
+        </div>
+        <div id="wh-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="wh-results" aria-live="polite" aria-label="Work hours results"></aside>
+  </div>
+</div>
+
+<section class="container more-tools" aria-labelledby="more-tools-title"><div class="more-tools-head"><h2 id="more-tools-title">Other free tools</h2><p>Keep going: these work together with the tool above.</p></div><div class="other-tools-grid"><a class="other-tool tone-green" href="../pay-calculator/"><span class="tool-icon tone-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><path d="M6 10v5M18 10v5"/></svg></span><span class="ot-body"><span class="ot-tag">Free tool</span><strong>Pay Calculator</strong><span class="ot-desc">Turn your hourly rate into daily, weekly, biweekly, monthly or yearly pay.</span></span><span class="ot-cta">Calculate pay <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="other-tool tone-amber" href="../salary-breakdown/"><span class="tool-icon tone-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 11-9-9v9z"/><path d="M15 3.5A9 9 0 0120.5 9H15z"/></svg></span><span class="ot-body"><span class="ot-tag">Free tool</span><strong>Salary Breakdown</strong><span class="ot-desc">Split your monthly salary into expenses and savings, with a clear chart.</span></span><span class="ot-cta">Plan my budget <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></section>
+
+<!-- AD SLOT "below-tool": paste your approved Google AdSense <ins> code inside this div. -->
+<div class="ad-slot" data-ad-slot="below-tool"></div>
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>How to use the work hours calculator</h2>
+      <ol>
+        <li>Type your <strong>start time</strong>, for example <em>8:00</em>, and choose AM or PM. You can also type <em>8a</em> or <em>8:00 am</em>.</li>
+        <li>Type your <strong>end time</strong>, for example <em>5:00 PM</em>.</li>
+        <li>Enter your <strong>unpaid break</strong> in minutes or hours.</li>
+        <li>Press <strong>Calculate</strong>. If you change a value afterwards, the results update automatically.</li>
+      </ol>
+      <p>Prefer military time? Switch to <strong>24-hour</strong> and type times such as <em>06:30</em> or <em>18:00</em>. Your entries are converted automatically.</p>
+
+      <h2>How hours worked are calculated</h2>
+      <p class="formula">Net hours worked = (End time &minus; Start time) &minus; Break</p>
+      <div class="example">
+        <p><strong>Example:</strong> You start at 8:00 AM and finish at 5:00 PM. That's 9 hours from start to end. Subtract a 1-hour lunch break and you worked <strong>8 hours (8.00 decimal hours)</strong>.</p>
+      </div>
+
+      <h2>Night shifts that cross midnight</h2>
+      <p>If your end time is earlier than your start time, the calculator knows your shift ended the next day. For example, 10:00 PM to 6:30 AM is 8 hours and 30 minutes. No extra steps are needed, and the result is marked as an overnight shift.</p>
+
+      <h2>What are decimal hours?</h2>
+      <p>Payroll systems and timesheets usually record time as a decimal number so it can be multiplied by an hourly rate. To convert, divide the minutes by 60 and add them to the hours:</p>
+      <table>
+        <thead><tr><th scope="col">Hours and minutes</th><th scope="col">Decimal hours</th></tr></thead>
+        <tbody>
+          <tr><td>7 hrs 15 min</td><td>7.25</td></tr>
+          <tr><td>7 hrs 30 min</td><td>7.50</td></tr>
+          <tr><td>7 hrs 45 min</td><td>7.75</td></tr>
+          <tr><td>8 hrs 20 min</td><td>8.33</td></tr>
+          <tr><td>8 hrs 40 min</td><td>8.67</td></tr>
+        </tbody>
+      </table>
+      <p>A common mistake is writing 7 hours 30 minutes as 7.30. The correct decimal value is 7.50. At $20 an hour, that mistake would cost you $4.00 for a single shift.</p>
+
+      <h2>Which breaks should I subtract?</h2>
+      <p>Subtract only <strong>unpaid</strong> breaks, such as a 30-minute or 1-hour meal break during which you are fully relieved of duty. Under federal rules, short rest breaks (usually 5 to 20 minutes) are generally paid work time, so don't subtract them. Some states have their own break rules, and your employer's policy may differ.</p>
+
+      <h2>Next step: turn hours into pay</h2>
+      <p>Once you know your hours, use the <a href="../pay-calculator/">Pay Calculator</a> to see your gross pay for a day, week, two weeks, month or year. Then plan where that money goes with the <a href="../salary-breakdown/">Salary Breakdown</a> tool.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-list">
+<details class="faq-item"><summary>How do I calculate hours worked for an overnight shift?</summary><div class="faq-body"><p>Just enter the real start and end times, such as 10:00 PM and 6:30 AM. Because the end time is earlier than the start time, the calculator knows the shift ended the next day and returns 8 hours 30 minutes.</p></div></details>
+<details class="faq-item"><summary>How do I enter a 1-hour break?</summary><div class="faq-body"><p>Type 1 and choose hours from the menu next to the break field, or type 60 and keep minutes selected. Both give the same result.</p></div></details>
+<details class="faq-item"><summary>What&#x27;s the difference between total time and net hours?</summary><div class="faq-body"><p>Total time is everything from your start time to your end time. Net hours worked is total time minus your unpaid break, which is the time you are normally paid for.</p></div></details>
+<details class="faq-item"><summary>How do I convert minutes to decimal hours?</summary><div class="faq-body"><p>Divide the minutes by 60. For example, 45 minutes is 0.75 hours, so 7 hours 45 minutes is 7.75 decimal hours. The calculator shows both formats.</p></div></details>
+</div>
+    </article>
+    <aside class="sidebar" aria-label="Related tools">
+      <div class="card side-tools"><h2>Other free tools</h2><a class="mini-tool tone-green" href="../pay-calculator/"><span class="tool-icon tone-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><path d="M6 10v5M18 10v5"/></svg></span><span><strong>Pay Calculator</strong><small>Turn your hourly rate into daily, weekly, biweekly, monthly or yearly pay.</small></span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="mini-tool tone-amber" href="../salary-breakdown/"><span class="tool-icon tone-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 11-9-9v9z"/><path d="M15 3.5A9 9 0 0120.5 9H15z"/></svg></span><span><strong>Salary Breakdown</strong><small>Split your monthly salary into expenses and savings, with a clear chart.</small></span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </aside>
+  </div>
+</div>
+
+<!-- AD SLOT "end-of-content": paste your approved Google AdSense <ins> code inside this div. -->
+<div class="ad-slot" data-ad-slot="end-of-content"></div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0f2b52"/><circle cx="20" cy="21" r="11" fill="none" stroke="#fff" stroke-width="3"/><path d="M20 15v6.5l4.5 3" fill="none" stroke="#5fd3a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 6h8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Work<b>Hours</b></span></a>
+        <p>Free, simple tools to calculate work hours, hourly pay and your monthly budget. Every calculation runs privately in your browser.</p>
+      </div>
+      <div>
+        <h2>Tools</h2>
+        <ul><li><a href="../work-hours-calculator/">Work Hours Calculator</a></li><li><a href="../pay-calculator/">Pay Calculator</a></li><li><a href="../salary-breakdown/">Salary Breakdown</a></li></ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul><li><a href="../about/">About Us</a></li><li><a href="../contact/">Contact Us</a></li></ul>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <ul><li><a href="../privacy-policy/">Privacy Policy</a></li><li><a href="../terms-of-use/">Terms of Use</a></li><li><a href="../disclaimer/">Disclaimer</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-year>2026</span> WorkHours. All rights reserved.</span>
+      <span>Results are estimates for informational purposes, not legal, tax or financial advice.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/i18n.js" defer></script>
+<script src="../assets/js/calc.js" defer></script>
+<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/workhours.js" defer></script>
+</body>
+</html>

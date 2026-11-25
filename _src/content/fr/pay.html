@@ -1,0 +1,110 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Calculateur de salaire horaire</h1>
+    <p class="lead">Calculez votre salaire brut à partir de votre taux horaire et de vos heures de travail. Choisissez une paie journalière, hebdomadaire, toutes les deux semaines, mensuelle ou annuelle, ajoutez vos heures supplémentaires et voyez le détail du calcul.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="pay-title">
+      <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
+        <h2 id="pay-title">Votre taux et vos heures</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="pay-rate">Taux horaire</label>
+            <div class="input-prefix"><span>$</span><input id="pay-rate" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20,00" aria-describedby="pay-rate-err"></div>
+            <span class="field-error" id="pay-rate-err"></span>
+          </div>
+          <div class="field">
+            <label for="pay-period">Période de paie</label>
+            <select id="pay-period" class="input">
+              <option value="daily">Journalière</option>
+              <option value="weekly" selected>Hebdomadaire</option>
+              <option value="biweekly">Toutes les 2 semaines</option>
+              <option value="monthly">Mensuelle</option>
+              <option value="annually">Annuelle</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="pay-hours" id="pay-hours-label">Heures normales travaillées par semaine</label>
+            <div class="input-suffix"><input id="pay-hours" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="40" aria-describedby="pay-hours-err pay-hours-hint"><span>h</span></div>
+            <span class="hint" id="pay-hours-hint">Utilisez des heures décimales : 7 h 30 = 7,5. Besoin d'aide ? Utilisez le <a href="{{root}}work-hours-calculator/">calculateur d'heures de travail</a>.</span>
+            <span class="field-error" id="pay-hours-err"></span>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-200)">
+          <label class="check"><input type="checkbox" id="pay-ot-on"> <span>Ajouter des heures supplémentaires</span></label>
+        </div>
+        <div id="pay-ot-group" hidden>
+          <div class="form-grid" style="margin-top:14px">
+            <div class="field">
+              <label for="pay-ot" id="pay-ot-label">Heures supplémentaires par semaine</label>
+              <div class="input-suffix"><input id="pay-ot" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="pay-ot-err"><span>h</span></div>
+              <span class="field-error" id="pay-ot-err"></span>
+            </div>
+          </div>
+          <label class="check" style="margin-top:14px"><input type="checkbox" id="pay-ot-15"> <span>Payer les heures supplémentaires à 1,5&times; (taux majoré de 50 %)<br><small style="font-weight:500;color:var(--gray-500)">Si la case n'est pas cochée, les heures supplémentaires sont payées au taux normal.</small></span></label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Calculer le salaire</button>
+          <button type="reset" class="btn btn-outline btn-lg">Effacer</button>
+        </div>
+        <div id="pay-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="pay-results" aria-live="polite" aria-label="Résultats du salaire"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>Comment calculer votre salaire</h2>
+      <p>Le salaire brut est ce que vous gagnez avant impôts et autres retenues. Pour un travail payé à l'heure, la formule est simple :</p>
+      <p class="formula">Salaire brut = Taux horaire &times; Heures travaillées<br>+ Heures supplémentaires &times; Taux majoré (le cas échéant)</p>
+      <div class="example">
+        <p><strong>Exemple :</strong> vous gagnez 20,00 $ de l'heure et travaillez 40 heures normales plus 5 heures supplémentaires dans la semaine. Le salaire normal est de 40 &times; 20,00 $ = 800,00 $. À 1,5&times;, le taux des heures supplémentaires est de 30,00 $, soit 5 &times; 30,00 $ = 150,00 $. Salaire brut hebdomadaire : <strong>950,00 $</strong>.</p>
+      </div>
+
+      <h2>Comprendre les périodes de paie</h2>
+      <table>
+        <thead><tr><th scope="col">Période de paie</th><th scope="col">Versements par an</th><th scope="col">20 $/h, 40 h/semaine</th></tr></thead>
+        <tbody>
+          <tr><td>Journalière (8 h)</td><td>260 jours ouvrés</td><td>160,00 $</td></tr>
+          <tr><td>Hebdomadaire</td><td>52</td><td>800,00 $</td></tr>
+          <tr><td>Toutes les 2 semaines</td><td>26</td><td>1 600,00 $</td></tr>
+          <tr><td>Mensuelle</td><td>12</td><td>3 466,67 $</td></tr>
+          <tr><td>Annuelle</td><td>1</td><td>41 600,00 $</td></tr>
+        </tbody>
+      </table>
+      <p>Le salaire mensuel n'est pas simplement quatre semaines de salaire. Une année compte 52 semaines, donc un mois moyen compte environ 4,33 semaines. Multiplier le salaire hebdomadaire par 4 sous-estime votre revenu mensuel d'environ 8 %.</p>
+
+      <h2>À propos des heures supplémentaires</h2>
+      <p>Aux États-Unis, la loi fédérale sur les normes de travail (FLSA) prévoit que la plupart des salariés payés à l'heure et <strong>non exemptés</strong> reçoivent au moins 1,5 fois leur taux normal pour les heures au-delà de 40 heures par semaine de travail. Cette règle ne s'applique toutefois pas à tout le monde :</p>
+      <ul>
+        <li>Certains salariés sont <strong>exemptés</strong>, comme de nombreux cadres et professionnels salariés qui remplissent des critères précis.</li>
+        <li>La loi fédérale se base sur la <strong>semaine de travail</strong>, pas sur la journée. Travailler plus de 8 heures en un jour n'impose pas à lui seul des heures supplémentaires selon la loi fédérale.</li>
+        <li>Les <strong>lois des États</strong> peuvent être plus favorables. La Californie, par exemple, impose souvent des heures supplémentaires journalières.</li>
+        <li>Votre <strong>employeur ou votre contrat</strong> peut prévoir un autre mode de paiement.</li>
+      </ul>
+      <p>C'est pourquoi l'option 1,5&times; est désactivée par défaut. Activez-la seulement si elle correspond à votre situation, et considérez le résultat comme une estimation.</p>
+
+      <h2>Salaire brut ou salaire net</h2>
+      <p>Ce calculateur affiche uniquement le <strong>salaire brut</strong>. Il ne déduit pas les impôts fédéraux, d'État ou locaux, la Sécurité sociale, Medicare, l'assurance ni les cotisations retraite, car ils dépendent de votre situation personnelle. Votre paie réelle sera inférieure au montant brut. Pour planifier vos dépenses du mois, saisissez votre salaire net dans l'outil <a href="{{root}}salary-breakdown/">Répartition du salaire</a>, ou saisissez votre salaire brut et ajoutez vos impôts comme catégorie.</p>
+
+      <h2>Questions fréquentes</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Outils associés">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

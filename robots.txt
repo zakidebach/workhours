@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zakidebach.github.io/workhours/sitemap.xml

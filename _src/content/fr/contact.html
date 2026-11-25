@@ -1,0 +1,45 @@
+<div class="container container-narrow content">
+  <article class="prose" style="max-width:none">
+    <h1>Contactez-nous</h1>
+    <p>Une question, une remarque, un calcul qui vous semble faux ou une idée d'amélioration ? Écrivez-nous. Nous lisons chaque message et essayons de répondre sous quelques jours ouvrés.</p>
+    <p>E-mail : <a href="mailto:{{email}}">{{email}}</a></p>
+  </article>
+
+  <section class="card" style="margin-top:12px" aria-labelledby="cf-title">
+    <h2 id="cf-title" style="font-size:1.25rem">Envoyer un message</h2>
+    <p style="color:var(--gray-600);font-size:.95rem">Ce formulaire ouvre un e-mail prérempli dans votre propre application de messagerie. Rien n'est envoyé tant que vous n'appuyez pas sur Envoyer dans cette application, et aucune donnée n'est stockée sur ce site.</p>
+    <form id="contact-form" data-email="{{email}}" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="cf-name">Votre nom</label>
+          <input id="cf-name" class="input" type="text" autocomplete="name" maxlength="80" aria-describedby="cf-name-err" required>
+          <span class="field-error" id="cf-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="cf-topic">Sujet</label>
+          <select id="cf-topic" class="input">
+            <option>Question générale</option>
+            <option>Signaler un problème de calcul</option>
+            <option>Suggestion</option>
+            <option>Publicité ou partenariat</option>
+            <option>Demande liée à la confidentialité</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" class="input" rows="6" maxlength="3000" aria-describedby="cf-message-err cf-message-hint" required style="resize:vertical"></textarea>
+          <span class="hint" id="cf-message-hint">Merci de ne pas inclure d'informations personnelles ou financières sensibles.</span>
+          <span class="field-error" id="cf-message-err"></span>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-green">Ouvrir l'e-mail à envoyer</button>
+      </div>
+      <div id="cf-status" class="form-status" role="status"></div>
+    </form>
+  </section>
+
+  <div class="notice" style="margin-top:24px">
+    <p><strong>À noter :</strong> nous ne pouvons pas donner de conseil juridique, fiscal ou de paie personnalisé. Pour une question sur votre situation, adressez-vous au service RH ou paie de votre employeur, à l'administration du travail compétente ou à un professionnel qualifié.</p>
+  </div>
+</div>

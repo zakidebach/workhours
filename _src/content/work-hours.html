@@ -1,0 +1,116 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>Free Work Hours Calculator</h1>
+    <p class="lead">Calculate hours worked in seconds. Enter when you started, when you finished and how long your break was. You'll get your net work time in hours and minutes and in decimal hours, even for night shifts that run past midnight.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="wh-title">
+      <form id="wh-form" novalidate data-pay-url="{{root}}pay-calculator/">
+        <div class="calc-toolbar">
+          <h2 id="wh-title" style="margin:0">Enter your shift</h2>
+          <div class="segmented" role="radiogroup" aria-label="Time format">
+            <label><input type="radio" name="wh-format" value="12" checked><span>12-hour</span></label>
+            <label><input type="radio" name="wh-format" value="24"><span>24-hour</span></label>
+          </div>
+        </div>
+
+        <div class="time-pair">
+          <div class="field" id="wh-start-field">
+            <label for="wh-start">Start Time</label>
+            <div class="time-field">
+              <input id="wh-start" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="8:00" aria-describedby="wh-start-err">
+              <select class="input ampm" aria-label="Start time AM or PM"><option value="AM">AM</option><option value="PM">PM</option></select>
+            </div>
+            <span class="field-error" id="wh-start-err"></span>
+          </div>
+          <div class="field" id="wh-end-field">
+            <label for="wh-end">End Time</label>
+            <div class="time-field">
+              <input id="wh-end" class="input time-input" type="text" autocomplete="off" spellcheck="false" placeholder="5:00" aria-describedby="wh-end-err">
+              <select class="input ampm" aria-label="End time AM or PM"><option value="AM">AM</option><option value="PM" selected>PM</option></select>
+            </div>
+            <span class="field-error" id="wh-end-err"></span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label for="wh-break">Break Duration (unpaid)</label>
+          <div class="break-pair">
+            <input id="wh-break" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="wh-break-err wh-break-hint">
+            <select id="wh-break-unit" class="input" aria-label="Break unit">
+              <option value="minutes" selected>minutes</option>
+              <option value="hours">hours</option>
+            </select>
+          </div>
+          <span class="hint" id="wh-break-hint">Leave blank or 0 if you had no unpaid break.</span>
+          <span class="field-error" id="wh-break-err"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">Calculate</button>
+          <button type="reset" class="btn btn-outline btn-lg">Clear</button>
+        </div>
+        <div id="wh-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="wh-results" aria-live="polite" aria-label="Work hours results"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>How to use the work hours calculator</h2>
+      <ol>
+        <li>Type your <strong>start time</strong>, for example <em>8:00</em>, and choose AM or PM. You can also type <em>8a</em> or <em>8:00 am</em>.</li>
+        <li>Type your <strong>end time</strong>, for example <em>5:00 PM</em>.</li>
+        <li>Enter your <strong>unpaid break</strong> in minutes or hours.</li>
+        <li>Press <strong>Calculate</strong>. If you change a value afterwards, the results update automatically.</li>
+      </ol>
+      <p>Prefer military time? Switch to <strong>24-hour</strong> and type times such as <em>06:30</em> or <em>18:00</em>. Your entries are converted automatically.</p>
+
+      <h2>How hours worked are calculated</h2>
+      <p class="formula">Net hours worked = (End time &minus; Start time) &minus; Break</p>
+      <div class="example">
+        <p><strong>Example:</strong> You start at 8:00 AM and finish at 5:00 PM. That's 9 hours from start to end. Subtract a 1-hour lunch break and you worked <strong>8 hours (8.00 decimal hours)</strong>.</p>
+      </div>
+
+      <h2>Night shifts that cross midnight</h2>
+      <p>If your end time is earlier than your start time, the calculator knows your shift ended the next day. For example, 10:00 PM to 6:30 AM is 8 hours and 30 minutes. No extra steps are needed, and the result is marked as an overnight shift.</p>
+
+      <h2>What are decimal hours?</h2>
+      <p>Payroll systems and timesheets usually record time as a decimal number so it can be multiplied by an hourly rate. To convert, divide the minutes by 60 and add them to the hours:</p>
+      <table>
+        <thead><tr><th scope="col">Hours and minutes</th><th scope="col">Decimal hours</th></tr></thead>
+        <tbody>
+          <tr><td>7 hrs 15 min</td><td>7.25</td></tr>
+          <tr><td>7 hrs 30 min</td><td>7.50</td></tr>
+          <tr><td>7 hrs 45 min</td><td>7.75</td></tr>
+          <tr><td>8 hrs 20 min</td><td>8.33</td></tr>
+          <tr><td>8 hrs 40 min</td><td>8.67</td></tr>
+        </tbody>
+      </table>
+      <p>A common mistake is writing 7 hours 30 minutes as 7.30. The correct decimal value is 7.50. At $20 an hour, that mistake would cost you $4.00 for a single shift.</p>
+
+      <h2>Which breaks should I subtract?</h2>
+      <p>Subtract only <strong>unpaid</strong> breaks, such as a 30-minute or 1-hour meal break during which you are fully relieved of duty. Under federal rules, short rest breaks (usually 5 to 20 minutes) are generally paid work time, so don't subtract them. Some states have their own break rules, and your employer's policy may differ.</p>
+
+      <h2>Next step: turn hours into pay</h2>
+      <p>Once you know your hours, use the <a href="{{root}}pay-calculator/">Pay Calculator</a> to see your gross pay for a day, week, two weeks, month or year. Then plan where that money goes with the <a href="{{root}}salary-breakdown/">Salary Breakdown</a> tool.</p>
+
+      <h2>Frequently asked questions</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="Related tools">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}

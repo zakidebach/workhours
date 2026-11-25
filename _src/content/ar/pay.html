@@ -1,0 +1,110 @@
+<div class="container">
+  <header class="page-hero">
+    <h1>حاسبة الأجر بالساعة</h1>
+    <p class="lead">اعرف أجرك الإجمالي من أجرك بالساعة وعدد ساعات عملك. اختر الأجر اليومي أو الأسبوعي أو كل أسبوعين أو الشهري أو السنوي، وأضف ساعاتك الإضافية إن وُجدت، وشاهد بالضبط كيف حُسب المجموع.</p>
+  </header>
+
+  <div class="calc-layout">
+    <section class="card calc-panel" aria-labelledby="pay-title">
+      <form id="pay-form" novalidate data-budget-url="{{root}}salary-breakdown/">
+        <h2 id="pay-title">أجرك وساعاتك</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="pay-rate">الأجر بالساعة</label>
+            <div class="input-prefix"><span>$</span><input id="pay-rate" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="20.00" aria-describedby="pay-rate-err"></div>
+            <span class="field-error" id="pay-rate-err"></span>
+          </div>
+          <div class="field">
+            <label for="pay-period">فترة الراتب</label>
+            <select id="pay-period" class="input">
+              <option value="daily">يومي</option>
+              <option value="weekly" selected>أسبوعي</option>
+              <option value="biweekly">كل أسبوعين</option>
+              <option value="monthly">شهري</option>
+              <option value="annually">سنوي</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="pay-hours" id="pay-hours-label">ساعات العمل العادية في الأسبوع</label>
+            <div class="input-suffix"><input id="pay-hours" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="40" aria-describedby="pay-hours-err pay-hours-hint"><span>ساعة</span></div>
+            <span class="hint" id="pay-hours-hint">استخدم الساعات العشرية: 7 ساعات و30 دقيقة = 7.5. لست متأكدًا؟ استخدم <a href="{{root}}work-hours-calculator/">حاسبة ساعات العمل</a>.</span>
+            <span class="field-error" id="pay-hours-err"></span>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-200)">
+          <label class="check"><input type="checkbox" id="pay-ot-on"> <span>إضافة ساعات إضافية</span></label>
+        </div>
+        <div id="pay-ot-group" hidden>
+          <div class="form-grid" style="margin-top:14px">
+            <div class="field">
+              <label for="pay-ot" id="pay-ot-label">الساعات الإضافية في الأسبوع</label>
+              <div class="input-suffix"><input id="pay-ot" class="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="pay-ot-err"><span>ساعة</span></div>
+              <span class="field-error" id="pay-ot-err"></span>
+            </div>
+          </div>
+          <label class="check" style="margin-top:14px"><input type="checkbox" id="pay-ot-15"> <span>احسب الساعات الإضافية بمعدل 1.5&times; (مرة ونصف)<br><small style="font-weight:500;color:var(--gray-500)">إذا لم تحدد هذا الخيار، تُحسب الساعات الإضافية بالأجر العادي.</small></span></label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green btn-lg">احسب الأجر</button>
+          <button type="reset" class="btn btn-outline btn-lg">مسح</button>
+        </div>
+        <div id="pay-status" class="form-status" role="alert"></div>
+      </form>
+    </section>
+
+    <aside class="card results" id="pay-results" aria-live="polite" aria-label="نتائج الأجر"></aside>
+  </div>
+</div>
+
+{{more_tools}}
+
+{{ad:below-tool}}
+
+<div class="container tool-content">
+  <div class="content-layout">
+    <article class="prose">
+      <h2>كيف تحسب أجرك</h2>
+      <p>الأجر الإجمالي هو ما تكسبه قبل الضرائب والاقتطاعات الأخرى. للعمل المدفوع بالساعة، المعادلة بسيطة:</p>
+      <p class="formula">الأجر الإجمالي = الأجر بالساعة &times; ساعات العمل<br>+ الساعات الإضافية &times; أجر الساعة الإضافية (إن وُجدت)</p>
+      <div class="example">
+        <p><strong>مثال:</strong> تكسب 20.00$ في الساعة وتعمل 40 ساعة عادية و5 ساعات إضافية في الأسبوع. الأجر العادي = 40 &times; 20.00$ = 800.00$. بمعدل مرة ونصف يصبح أجر الساعة الإضافية 30.00$، فيكون أجر الساعات الإضافية 5 &times; 30.00$ = 150.00$. الأجر الإجمالي الأسبوعي: <strong>950.00$</strong>.</p>
+      </div>
+
+      <h2>فهم فترات الراتب</h2>
+      <table>
+        <thead><tr><th scope="col">فترة الراتب</th><th scope="col">عدد الدفعات في السنة</th><th scope="col">20$/ساعة، 40 ساعة/أسبوع</th></tr></thead>
+        <tbody>
+          <tr><td>يومي (8 ساعات)</td><td>260 يوم عمل</td><td>160.00$</td></tr>
+          <tr><td>أسبوعي</td><td>52</td><td>800.00$</td></tr>
+          <tr><td>كل أسبوعين</td><td>26</td><td>1,600.00$</td></tr>
+          <tr><td>شهري</td><td>12</td><td>3,466.67$</td></tr>
+          <tr><td>سنوي</td><td>1</td><td>41,600.00$</td></tr>
+        </tbody>
+      </table>
+      <p>الراتب الشهري ليس مجرد أجر أربعة أسابيع. في السنة 52 أسبوعًا، أي أن الشهر يضم في المتوسط نحو 4.33 أسبوع. ضرب الأجر الأسبوعي في 4 يقلّل دخلك الشهري بنحو 8%.</p>
+
+      <h2>عن الساعات الإضافية</h2>
+      <p>وفق قانون معايير العمل العادلة الفيدرالي الأمريكي (FLSA)، يجب أن يحصل معظم الموظفين بالساعة <strong>غير المستثنين</strong> على 1.5 ضعف أجرهم العادي على الأقل عن الساعات التي تزيد على 40 ساعة في أسبوع العمل. لكن هذه القاعدة لا تنطبق على الجميع:</p>
+      <ul>
+        <li>بعض الموظفين <strong>مستثنون</strong> من الساعات الإضافية، مثل كثير من المديرين والمهنيين ذوي الرواتب الثابتة الذين يستوفون شروطًا محددة.</li>
+        <li>القانون الفيدرالي يعتمد على <strong>أسبوع العمل</strong> لا على اليوم. العمل أكثر من 8 ساعات في يوم واحد لا يوجب وحده أجرًا إضافيًا وفق القانون الفيدرالي.</li>
+        <li><strong>قوانين الولايات</strong> قد تكون أكثر سخاءً. كاليفورنيا مثلًا تفرض ساعات إضافية يومية في حالات كثيرة.</li>
+        <li>قد يدفع <strong>صاحب العمل أو العقد</strong> الساعات الإضافية بطريقة مختلفة.</li>
+      </ul>
+      <p>لهذا السبب يكون خيار 1.5&times; غير مفعّل افتراضيًا. فعّله فقط إذا كان يناسب وضعك، واعتبر النتيجة تقديرًا.</p>
+
+      <h2>الأجر الإجمالي والأجر الصافي</h2>
+      <p>تعرض هذه الحاسبة <strong>الأجر الإجمالي</strong> فقط. لا تخصم الضرائب الفيدرالية أو ضرائب الولاية أو الضرائب المحلية، ولا الضمان الاجتماعي أو Medicare أو التأمين أو مساهمات التقاعد، لأنها تعتمد على وضعك الشخصي. سيكون راتبك الفعلي أقل من المبلغ الإجمالي. لتخطيط مصاريفك الشهرية، أدخل راتبك الصافي في أداة <a href="{{root}}salary-breakdown/">تقسيم الراتب</a>، أو أدخل الإجمالي وأضف ضرائبك كفئة.</p>
+
+      <h2>الأسئلة الشائعة</h2>
+      {{faq}}
+    </article>
+    <aside class="sidebar" aria-label="أدوات ذات صلة">
+      {{sidebar_tools}}
+    </aside>
+  </div>
+</div>
+
+{{ad:end-of-content}}
